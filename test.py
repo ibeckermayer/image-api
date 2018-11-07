@@ -1,11 +1,6 @@
-from operations import rotate, scale
+from operations import rotate, scale, pipeline
 from PIL import Image
-from functools import reduce
 
-def pipeline(image, operations):
-    return reduce((lambda last, operation: operation(last)), operations, image)
-
-im = Image.open("kek.png")
+im = Image.open("kek.jpg")
 rotated = pipeline(im, [rotate(100), scale((1000, 500))])
-
 rotated.show()
