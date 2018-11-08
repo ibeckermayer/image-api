@@ -1,6 +1,11 @@
-from PIL.Image import Image, BICUBIC
+from PIL.Image import Image, BICUBIC, FLIP_LEFT_RIGHT, FLIP_TOP_BOTTOM
 from typing import Callable, Tuple, Union
 from functools import reduce
+from enum import Enum
+
+class Flip(Enum):
+    Horizontal = FLIP_LEFT_RIGHT
+    Vertical = FLIP_TOP_BOTTOM
 
 def rotate(degrees: Union[int, float]) -> Callable[[Image], Image]:
     def closure(image: Image) -> Image:
@@ -16,6 +21,11 @@ def crop(top: int, left: int, bottom: int, right: int) -> Callable[[Image], Imag
     def closure(image: Image) -> Image:
         return image.crop((left, top, right, bottom))
     return closure
-        
+
+def mirror(method: Flip) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return image.transpose(method.value)
+    return closure
+
 def pipeline(image: Image, operations: [Callable[[Image], Image]]) -> Image:
     return reduce(lambda last, operation: operation(last), operations, image)
