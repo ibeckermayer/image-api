@@ -54,6 +54,21 @@ def blur(radius: int = 2) -> Callable[[Image], Image]:
         return image.filter(ImageFilter.GaussianBlur(radius))
     return closure
 
+def maxFilter(size: int = 3) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return image.filter(ImageFilter.MaxFilter(size))
+    return closure
+
+def minFilter(size: int = 3) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return image.filter(ImageFilter.MinFilter(size))
+    return closure
+
+def modeFilter(size: int = 3) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return image.filter(ImageFilter.ModeFilter(size))
+    return closure
+
 def _enhance(enhancer, factor):
     def closure(image: Image) -> Image:
         return enhancer(image).enhance(factor)
