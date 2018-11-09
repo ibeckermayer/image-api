@@ -23,7 +23,9 @@ def scale(xsize: int = None, ysize: int = None) -> Callable[[Image], Image]:
         return image.resize((int(round(absX)), int(round(absY))), BICUBIC)
     return closure
 
-def crop(top: int, left: int, bottom: int, right: int) -> Callable[[Image], Image]:
+def crop(topleft: Tuple[int, int], bottomright: Tuple[int, int]) -> Callable[[Image], Image]:
+    top, left = topleft
+    bottom, right = bottomright
     def closure(image: Image) -> Image:
         return image.crop((left, top, right, bottom))
     return closure
