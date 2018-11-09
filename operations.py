@@ -39,7 +39,7 @@ def brightness(factor: float) -> Callable[[Image], Image]:
 
 def contrast(factor: float) -> Callable[[Image], Image]:
     return _enhance(ImageEnhance.Contrast, factor)
-    
+
 def sharpen(factor: float) -> Callable[[Image], Image]:
     return _enhance(ImageEnhance.Sharpness, factor)
 
