@@ -37,23 +37,20 @@ def mirror(method: Flip) -> Callable[[Image], Image]:
     return closure
 
 def color(factor: float) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return ImageEnhance.Color(image).enhance(factor)
-    return closure
+    return _enhance(ImageEnhance.Color, factor)
 
 def brightness(factor: float) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return ImageEnhance.Brightness(image).enhance(factor)
-    return closure
+    return _enhance(ImageEnhance.Brightness, factor)
 
 def contrast(factor: float) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return ImageEnhance.Contrast(image).enhance(factor)
-    return closure
-
+    return _enhance(ImageEnhance.Contrast, factor)
+    
 def sharpen(factor: float) -> Callable[[Image], Image]:
+    return _enhance(ImageEnhance.Sharpness, factor)
+
+def _enhance(enhancer, factor):
     def closure(image: Image) -> Image:
-        return ImageEnhance.Sharpness(image).enhance(factor)
+        return enhancer(image).enhance(factor)
     return closure
 
 def pipeline(image: Image, operations: [Callable[[Image], Image]]) -> Image:
