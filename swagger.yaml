@@ -1,0 +1,63 @@
+---
+swagger: "2.0"
+info:
+  description: "Image Processing API"
+  version: "1.0.0"
+  title: "Image Processor"
+host: "localhost:8080"
+basePath: "/image"
+schemes:
+- "https"
+paths:
+  /process:
+    post:
+      summary: Takes an image and processes it according to accompanying json
+      consumes:
+      - multipart/form-data
+      parameters:
+      - in: formData
+        name: image
+        type: file
+        description: The image
+        required: true
+      - in: formData
+        name: processes
+        type: file
+        description: JSON string containing array of the processes, in the order they should be preformed 
+        required: true
+      responses:
+        200:
+          description: OK
+
+definitions:
+  Processes:
+    type: "object"
+    required:
+    - "list_of_Process"
+    properties:
+      list_of_Process:
+        type: "array"
+        items:
+          $ref: "#/definitions/Process"
+  Process:
+    type: object
+    properties:
+      type:
+        type: string
+    discriminator: type
+    required:
+      - type
+  Rotate:
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "parameters"
+        properties:
+          parameters:
+            type: object
+            required:
+            - "degrees"
+            properties:
+              degrees:
+                type: number
