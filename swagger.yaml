@@ -10,7 +10,7 @@ schemes:
 - "https"
 paths:
   /process:
-    post:
+n    post:
       summary: Takes an image and processes it according to accompanying json
       consumes:
       - multipart/form-data
@@ -72,7 +72,11 @@ definitions:
         type: string
       value:
         type: string
-  Rotate:
+    required:
+    - parameter
+    - value
+  Process --> Rotate:
+    description: Rotate image N degrees
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -81,17 +85,46 @@ definitions:
         properties:
           type:
             enum: 
-            - rotate
+            - Rotate
           list_of_Parameter:
+            description: 1 item list containing the degrees to rotate the image
+            items:
+              type: object
+              properties:
+                parameter:
+                  description: Number of degrees to rotate
+                  type: string
+                  enum: 
+                  - degrees
+                value:
+                 type: string
+                 description: Converted to type float.
+  Process --> Scale:
+    description: Scale an image along the x-axis, y-axis, or both.
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Scale
+          list_of_Parameter:
+            description: xsize, ysize, or both
             items:
               type: object
               properties:
                 parameter:
                   type: string
                   enum: 
-                  - degrees
+                  - xsize
+                  - ysize
+                  description: Specify an x size, y size, or both.
                 value:
                  type: string
+                 description: Converted to type int.
+                 
 
                 
 
