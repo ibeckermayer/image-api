@@ -1,5 +1,6 @@
 from PIL.Image import Image, BICUBIC, FLIP_LEFT_RIGHT, FLIP_TOP_BOTTOM
 from PIL import ImageEnhance
+from PIL import ImageFilter
 from typing import Callable, Tuple, Union
 from functools import reduce
 from enum import Enum
@@ -47,6 +48,11 @@ def contrast(factor: float) -> Callable[[Image], Image]:
     
 def sharpen(factor: float) -> Callable[[Image], Image]:
     return _enhance(ImageEnhance.Sharpness, factor)
+
+def blur(radius: int = 2) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return image.filter(ImageFilter.GaussianBlur(radius))
+    return closure
 
 def _enhance(enhancer, factor):
     def closure(image: Image) -> Image:
