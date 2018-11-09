@@ -69,6 +69,16 @@ def modeFilter(size: int = 3) -> Callable[[Image], Image]:
         return image.filter(ImageFilter.ModeFilter(size))
     return closure
 
+def medianFilter(size: int = 3) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return image.filter(ImageFilter.MedianFilter(size))
+    return closure
+
+def edge() -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return image.filter(ImageFilter.EDGE_ENHANCE)
+    return closure
+
 def _enhance(enhancer, factor):
     def closure(image: Image) -> Image:
         return enhancer(image).enhance(factor)
