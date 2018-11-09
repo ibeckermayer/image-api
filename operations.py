@@ -1,4 +1,5 @@
 from PIL.Image import Image, BICUBIC, FLIP_LEFT_RIGHT, FLIP_TOP_BOTTOM
+from PIL import ImageEnhance
 from typing import Callable, Tuple, Union
 from functools import reduce
 from enum import Enum
@@ -33,6 +34,26 @@ def crop(topleft: Tuple[int, int], bottomright: Tuple[int, int]) -> Callable[[Im
 def mirror(method: Flip) -> Callable[[Image], Image]:
     def closure(image: Image) -> Image:
         return image.transpose(method.value)
+    return closure
+
+def color(factor: float) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return ImageEnhance.Color(image).enhance(factor)
+    return closure
+
+def brightness(factor: float) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return ImageEnhance.Brightness(image).enhance(factor)
+    return closure
+
+def contrast(factor: float) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return ImageEnhance.Contrast(image).enhance(factor)
+    return closure
+
+def sharpen(factor: float) -> Callable[[Image], Image]:
+    def closure(image: Image) -> Image:
+        return ImageEnhance.Sharpness(image).enhance(factor)
     return closure
 
 def pipeline(image: Image, operations: [Callable[[Image], Image]]) -> Image:
