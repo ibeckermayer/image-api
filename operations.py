@@ -10,9 +10,7 @@ class Flip(Enum):
     Vertical = FLIP_TOP_BOTTOM
 
 def rotate(degrees: Union[int, float]) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return image.rotate(degrees)
-    return closure
+    return lambda image: image.rotate(degrees)
 
 def scale(xsize: int = None, ysize: int = None) -> Callable[[Image], Image]:
     if not xsize and not ysize:
@@ -28,14 +26,10 @@ def scale(xsize: int = None, ysize: int = None) -> Callable[[Image], Image]:
 def crop(topleft: Tuple[int, int], bottomright: Tuple[int, int]) -> Callable[[Image], Image]:
     top, left = topleft
     bottom, right = bottomright
-    def closure(image: Image) -> Image:
-        return image.crop((left, top, right, bottom))
-    return closure
+    return lambda image: image.crop((left, top, right, bottom))
 
 def mirror(method: Flip) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return image.transpose(method.value)
-    return closure
+    return lambda image: image.transpose(method.value)
 
 def color(factor: float) -> Callable[[Image], Image]:
     return _enhance(ImageEnhance.Color, factor)
@@ -50,39 +44,25 @@ def sharpen(factor: float) -> Callable[[Image], Image]:
     return _enhance(ImageEnhance.Sharpness, factor)
 
 def blur(radius: int = 2) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return image.filter(ImageFilter.GaussianBlur(radius))
-    return closure
+    return lambda image: image.filter(ImageFilter.GaussianBlur(radius))
 
 def maxFilter(size: int = 3) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return image.filter(ImageFilter.MaxFilter(size))
-    return closure
+    return lambda image: image.filter(ImageFilter.MaxFilter(size))
 
 def minFilter(size: int = 3) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return image.filter(ImageFilter.MinFilter(size))
-    return closure
+    return lambda image: image.filter(ImageFilter.MinFilter(size))
 
 def modeFilter(size: int = 3) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return image.filter(ImageFilter.ModeFilter(size))
-    return closure
+    return lambda image: image.filter(ImageFilter.ModeFilter(size))
 
 def medianFilter(size: int = 3) -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return image.filter(ImageFilter.MedianFilter(size))
-    return closure
+    return lambda image: image.filter(ImageFilter.MedianFilter(size))
 
 def edge() -> Callable[[Image], Image]:
-    def closure(image: Image) -> Image:
-        return image.filter(ImageFilter.EDGE_ENHANCE)
-    return closure
+    return lambda image: image.filter(ImageFilter.EDGE_ENHANCE)
 
 def _enhance(enhancer, factor):
-    def closure(image: Image) -> Image:
-        return enhancer(image).enhance(factor)
-    return closure
+    return lambda image: enhancer(image).enhance(factor)
 
 def pipeline(image: Image, operations: [Callable[[Image], Image]]) -> Image:
     return reduce(lambda last, operation: operation(last), operations, image)
