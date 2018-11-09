@@ -12,9 +12,15 @@ def rotate(degrees: Union[int, float]) -> Callable[[Image], Image]:
         return image.rotate(degrees)
     return closure
 
-def scale(xsize: int, ysize: int) -> Callable[[Image], Image]:
+def scale(xsize: int = None, ysize: int = None) -> Callable[[Image], Image]:
+    if not xsize and not ysize:
+        raise ValueError("You must specify either an x dimension, a y dimension, or both")
+
     def closure(image: Image) -> Image:
-        return image.resize((xsize, ysize), BICUBIC)
+        width, height = image.size
+        absX = xsize or width * (ysize / height)
+        absY = ysize or height * (xsize / width)
+        return image.resize((int(round(absX)), int(round(absY))), BICUBIC)
     return closure
 
 def crop(top: int, left: int, bottom: int, right: int) -> Callable[[Image], Image]:
