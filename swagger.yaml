@@ -44,20 +44,56 @@ definitions:
     properties:
       type:
         type: string
+        enum: 
+        - rotate
+        - scale
+        - crop
+        - mirror
+        - color
+        - brightness
+        - contrast
+        - sharpen
+        - blur
+        - maxFilter
+        - minFilter
+        - medianFilter
+        - edge
+      list_of_Parameter:
+        type: array
+        items:
+          $ref: "#/definitions/Parameter"
     discriminator: type
     required:
       - type
+  Parameter:
+    type: object
+    properties:
+      parameter:
+        type: string
+      value:
+        type: string
   Rotate:
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "parameters"
+        - "list_of_Parameter"
         properties:
-          parameters:
-            type: object
-            required:
-            - "degrees"
-            properties:
-              degrees:
-                type: number
+          type:
+            enum: 
+            - rotate
+          list_of_Parameter:
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum: 
+                  - degrees
+                value:
+                 type: string
+
+                
+
+    
+          
