@@ -10,20 +10,20 @@ schemes:
 - "https"
 paths:
   /process:
-n    post:
-      summary: Takes an image and processes it according to accompanying json
+    post:
+      summary: Takes an image and processes it according to accompanying json.
       consumes:
       - multipart/form-data
       parameters:
       - in: formData
         name: image
         type: file
-        description: The image
+        description: The image.
         required: true
       - in: formData
         name: processes
         type: file
-        description: JSON string containing array of the processes, in the order they should be preformed 
+        description: JSON string containing array of the processes, in the order they should be preformed. 
         required: true
       responses:
         200:
@@ -31,6 +31,7 @@ n    post:
 
 definitions:
   Processes:
+    description: Object containing the list of processes to preform on the image. Processes will be carried out in the order listed.
     type: "object"
     required:
     - "list_of_Process"
@@ -39,10 +40,13 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Process"
+
   Process:
+    description: Specification of a single process.
     type: object
     properties:
       type:
+        description: The type of image processing you want to preform. See enum for list of supported processes.
         type: string
         enum: 
         - rotate
@@ -59,12 +63,14 @@ definitions:
         - medianFilter
         - edge
       list_of_Parameter:
+        description: Parameter list to further specify the process, if necessary.
         type: array
         items:
           $ref: "#/definitions/Parameter"
     discriminator: type
     required:
       - type
+
   Parameter:
     type: object
     properties:
@@ -75,8 +81,9 @@ definitions:
     required:
     - parameter
     - value
+
   Process --> Rotate:
-    description: Rotate image N degrees
+    description: Rotate image N degrees.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -87,18 +94,19 @@ definitions:
             enum: 
             - Rotate
           list_of_Parameter:
-            description: 1 item list containing the degrees to rotate the image
+            description: Single item list containing the degrees to rotate the image.
             items:
               type: object
               properties:
                 parameter:
-                  description: Number of degrees to rotate
+                  description: Number of degrees to rotate.
                   type: string
                   enum: 
                   - degrees
                 value:
                  type: string
                  description: Converted to type float.
+
   Process --> Scale:
     description: Scale an image along the x-axis, y-axis, or both.
     allOf:
@@ -111,7 +119,7 @@ definitions:
             enum: 
             - Scale
           list_of_Parameter:
-            description: xsize, ysize, or both
+            description: Provide xsize, ysize, or both.
             items:
               type: object
               properties:
@@ -120,13 +128,255 @@ definitions:
                   enum: 
                   - xsize
                   - ysize
-                  description: Specify an x size, y size, or both.
+                  description: Size for the given axis.
                 value:
                  type: string
                  description: Converted to type int.
-                 
 
-                
+  Process --> Crop:
+    description: Crop an image by providing the top left and bottom right corners of the crop.
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Crop
+          list_of_Parameter:
+            description: Must provide both (x,y) pairs.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - top_left_x
+                  - top_left_y
+                  - bottom_right_x
+                  - bottom_right_y
+                  description: Specify points.
+                value:
+                 type: string
+                 description: Converted to type int.
 
-    
-          
+  Process --> Mirror:
+    description: Return a mirror image of the original image. No parameters.
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        properties:
+          type:
+            enum: 
+            - Mirror
+
+  Process --> Color:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Color
+          list_of_Parameter:
+            description: TODO
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - factor
+                  description: TODO
+                value:
+                 type: string
+                 description: Converted to type float.
+
+  Process --> Brightness:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Brightness
+          list_of_Parameter:
+            description: TODO
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - factor
+                  description: TODO
+                value:
+                 type: string
+                 description: Converted to type float.
+
+  Process --> Contrast:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Contrast
+          list_of_Parameter:
+            description: TODO
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - factor
+                  description: TODO
+                value:
+                 type: string
+                 description: Converted to type float.
+
+  Process --> Sharpen:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Sharpen
+          list_of_Parameter:
+            description: TODO
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - factor
+                  description: TODO
+                value:
+                 type: string
+                 description: Converted to type float.
+
+  Process --> Blur:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Blur
+          list_of_Parameter:
+            description: TODO
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - radius
+                  description: TODO
+                value:
+                 type: string
+                 description: Converted to type float.
+
+  Process --> maxFilter:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - maxFilter
+          list_of_Parameter:
+            description: TODO
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - size
+                  description: TODO
+                value:
+                 type: string
+                 description: Converted to type float.
+
+  Process --> minFilter:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - minFilter
+          list_of_Parameter:
+            description: TODO
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - size
+                  description: TODO
+                value:
+                 type: string
+                 description: Converted to type float.
+
+  Process --> medianFilter:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - medianFilter
+          list_of_Parameter:
+            description: TODO
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - size
+                  description: TODO
+                value:
+                 type: string
+                 description: Converted to type float.
+
+  Process --> Edge:
+    description: TODO
+    allOf:
+      - $ref: "#/definitions/Process"
+      - type: object
+        properties:
+          type:
+            enum: 
+            - Edge
