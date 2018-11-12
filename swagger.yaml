@@ -172,7 +172,7 @@ definitions:
             - Mirror
 
   Process --> Color:
-    description: TODO
+    description: Can be used to adjust the colour balance of an image, in a manner similar to the controls on a colour TV set. An enhancement factor of 0.0 gives a black and white image. A factor of 1.0 gives the original image.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -183,7 +183,7 @@ definitions:
             enum: 
             - Color
           list_of_Parameter:
-            description: TODO
+            description: Specify factor.
             items:
               type: object
               properties:
@@ -191,13 +191,13 @@ definitions:
                   type: string
                   enum:
                   - factor
-                  description: TODO
+                  description: Any valid float value.
                 value:
                  type: string
                  description: Converted to type float.
 
   Process --> Brightness:
-    description: TODO
+    description: Can be used to control the brightness of an image. An enhancement factor of 0.0 gives a black image. A factor of 1.0 gives the original image.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -208,7 +208,7 @@ definitions:
             enum: 
             - Brightness
           list_of_Parameter:
-            description: TODO
+            description: Specify factor.
             items:
               type: object
               properties:
@@ -216,13 +216,13 @@ definitions:
                   type: string
                   enum:
                   - factor
-                  description: TODO
+                  description: Any valid float value.
                 value:
                  type: string
                  description: Converted to type float.
 
   Process --> Contrast:
-    description: TODO
+    description: Can be used to control the contrast of an image, similar to the contrast control on a TV set. An enhancement factor of 0.0 gives a solid grey image. A factor of 1.0 gives the original image.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -233,7 +233,7 @@ definitions:
             enum: 
             - Contrast
           list_of_Parameter:
-            description: TODO
+            description: Specify factor.
             items:
               type: object
               properties:
@@ -241,13 +241,13 @@ definitions:
                   type: string
                   enum:
                   - factor
-                  description: TODO
+                  description: Any valid float value.
                 value:
                  type: string
                  description: Converted to type float.
 
   Process --> Sharpen:
-    description: TODO
+    description: Can be used to adjust the sharpness of an image. An enhancement factor of 0.0 gives a blurred image, a factor of 1.0 gives the original image, and a factor of 2.0 gives a sharpened image.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -258,7 +258,7 @@ definitions:
             enum: 
             - Sharpen
           list_of_Parameter:
-            description: TODO
+            description: Specify factor.
             items:
               type: object
               properties:
@@ -266,13 +266,13 @@ definitions:
                   type: string
                   enum:
                   - factor
-                  description: TODO
+                  description: Any valid float value.
                 value:
                  type: string
                  description: Converted to type float.
 
   Process --> Blur:
-    description: TODO
+    description: Gaussian blur filter.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -283,7 +283,7 @@ definitions:
             enum: 
             - Blur
           list_of_Parameter:
-            description: TODO
+            description: Specify radius.
             items:
               type: object
               properties:
@@ -291,13 +291,13 @@ definitions:
                   type: string
                   enum:
                   - radius
-                  description: TODO
+                  description: Radius value.
                 value:
                  type: string
                  description: Converted to type float.
 
   Process --> maxFilter:
-    description: TODO
+    description: Create a max filter. Picks the largest pixel value in a window with the given size.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -308,7 +308,7 @@ definitions:
             enum: 
             - maxFilter
           list_of_Parameter:
-            description: TODO
+            description: Specify size of filter window.
             items:
               type: object
               properties:
@@ -316,13 +316,13 @@ definitions:
                   type: string
                   enum:
                   - size
-                  description: TODO
+                  description: Filter size value.
                 value:
                  type: string
                  description: Converted to type float.
 
   Process --> minFilter:
-    description: TODO
+    description: Create a min filter. Picks the lowest pixel value in a window with the given size.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -333,7 +333,7 @@ definitions:
             enum: 
             - minFilter
           list_of_Parameter:
-            description: TODO
+            description: Specify size of filter window.
             items:
               type: object
               properties:
@@ -341,13 +341,13 @@ definitions:
                   type: string
                   enum:
                   - size
-                  description: TODO
+                  description: Filter size value.
                 value:
                  type: string
                  description: Converted to type float.
 
   Process --> medianFilter:
-    description: TODO
+    description: Create a median filter. Picks the median pixel value in a window with the given size.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -358,7 +358,7 @@ definitions:
             enum: 
             - medianFilter
           list_of_Parameter:
-            description: TODO
+            description: Specify size of filter window.
             items:
               type: object
               properties:
@@ -366,13 +366,13 @@ definitions:
                   type: string
                   enum:
                   - size
-                  description: TODO
+                  description: Filter size value.
                 value:
                  type: string
                  description: Converted to type float.
 
   Process --> Edge:
-    description: TODO
+    description: Enhance the edges on your image.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
