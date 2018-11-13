@@ -1,0 +1,175 @@
+---
+swagger: "2.0"
+info:
+  description: "Image Processing API"
+  version: "1.0.0"
+  title: "Image Processor"
+host: "localhost:8080"
+basePath: "/image"
+schemes:
+- "https"
+paths:
+  /image-process:
+    post:
+      summary: "Takes an image and processes it according to accompanying json."
+      operationId: "image_process_post"
+      consumes:
+      - "multipart/form-data"
+      parameters:
+      - name: "image"
+        in: "formData"
+        description: "The image."
+        required: true
+        type: "file"
+      - name: "processes"
+        in: "formData"
+        description: "JSON string containing array of the processes, in the order\
+          \ they should be preformed."
+        required: true
+        type: "file"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+definitions:
+  Processes:
+    type: "object"
+    required:
+    - "list_of_Process"
+    properties:
+      list_of_Process:
+        type: "array"
+        items:
+          $ref: "#/definitions/Process"
+    description: "Object containing the list of processes to preform on the image.\
+      \ Processes will be carried out in the order listed."
+  Process:
+    type: "object"
+    required:
+    - "type"
+    discriminator: "type"
+    properties:
+      type:
+        type: "string"
+        description: "The type of image processing you want to preform. See enum for\
+          \ list of supported processes."
+        enum:
+        - "rotate"
+        - "scale"
+        - "crop"
+        - "mirror"
+        - "color"
+        - "brightness"
+        - "contrast"
+        - "sharpen"
+        - "blur"
+        - "maxFilter"
+        - "minFilter"
+        - "modeFilter"
+        - "medianFilter"
+        - "edge"
+        - "reformat"
+      list_of_Parameter:
+        type: "array"
+        description: "Parameter list to further specify the process, if necessary."
+        items:
+          $ref: "#/definitions/Parameter"
+    description: "Specification of a single process."
+  Parameter:
+    type: "object"
+    required:
+    - "parameter"
+    - "value"
+    properties:
+      parameter:
+        type: "string"
+      value:
+        type: "string"
+  Process --> Rotate:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Rotate image N degrees."
+  Process --> Scale:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Scale an image along the x-axis, y-axis, or both."
+  Process --> Crop:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Crop an image by providing the top left and bottom right corners\
+      \ of the crop."
+  Process --> Mirror:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Return a mirror image of the original image. No parameters."
+  Process --> Color:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Can be used to adjust the colour balance of an image, in a manner\
+      \ similar to the controls on a colour TV set. An enhancement factor of 0.0 gives\
+      \ a black and white image. A factor of 1.0 gives the original image."
+  Process --> Brightness:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Can be used to control the brightness of an image. An enhancement\
+      \ factor of 0.0 gives a black image. A factor of 1.0 gives the original image."
+  Process --> Contrast:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Can be used to control the contrast of an image, similar to the\
+      \ contrast control on a TV set. An enhancement factor of 0.0 gives a solid grey\
+      \ image. A factor of 1.0 gives the original image."
+  Process --> Sharpen:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Can be used to adjust the sharpness of an image. An enhancement\
+      \ factor of 0.0 gives a blurred image, a factor of 1.0 gives the original image,\
+      \ and a factor of 2.0 gives a sharpened image."
+  Process --> Blur:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Gaussian blur filter."
+  Process --> maxFilter:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Create a max filter. Picks the largest pixel value in a window with\
+      \ the given size."
+  Process --> minFilter:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Create a min filter. Picks the lowest pixel value in a window with\
+      \ the given size."
+  Process --> modeFilter:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Create a mode filter. Picks the mode pixel value in a window with\
+      \ the given size."
+  Process --> medianFilter:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Create a median filter. Picks the median pixel value in a window\
+      \ with the given size."
+  Process --> Edge:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Enhance the edges on your image."
+  Process --> Reformat:
+    allOf:
+    - $ref: "#/definitions/Process"
+    - type: "object"
+    description: "Create a median filter. Picks the median pixel value in a window\
+      \ with the given size."
