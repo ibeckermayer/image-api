@@ -9,7 +9,7 @@ basePath: "/image"
 schemes:
 - "https"
 paths:
-  /process:
+  /image-process:
     post:
       summary: Takes an image and processes it according to accompanying json.
       consumes:
