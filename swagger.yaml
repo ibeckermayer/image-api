@@ -67,21 +67,21 @@ definitions:
         type: string
         example: Rotate
         enum: 
-        - rotate
-        - scale
-        - crop
-        - mirror
-        - color
-        - brightness
-        - contrast
-        - sharpen
-        - blur
+        - Rotate
+        - Scale
+        - Crop
+        - Mirror
+        - Color
+        - Brightness
+        - Contrast
+        - Sharpen
+        - Blur
         - maxFilter
         - minFilter
         - modeFilter
         - medianFilter
-        - edge
-        - reformat
+        - Edge
+        - Reformat
       array_of_Parameter:
         description: Parameter array to further specify the process, if necessary.
         type: array
