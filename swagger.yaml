@@ -432,9 +432,10 @@ definitions:
                 value:
                  enum:
                    - jpg
-                   - jpeg
                    - png
                    - pdf
                    - bmp
+                   - gif
                  type: string
                  description: Converted to type float.
+n
