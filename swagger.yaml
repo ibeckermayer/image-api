@@ -11,28 +11,27 @@ schemes:
 paths:
   /image-process:
     post:
-      summary: "Takes an image and processes it according to accompanying json."
-      operationId: "image_process_post"
+      summary: Takes an image and processes it according to accompanying json.
       consumes:
-      - "multipart/form-data"
+      - multipart/form-data
       parameters:
-      - name: "image"
-        in: "formData"
-        description: "The image."
+      - in: formData
+        name: image
+        type: file
+        description: The image.
         required: true
-        type: "file"
-      - name: "processes"
-        in: "formData"
-        description: "JSON string containing array of the processes, in the order\
-          \ they should be preformed."
+      - in: formData
+        name: processes
+        type: file
+        description: JSON string containing array of the processes, in the order they should be preformed. 
         required: true
-        type: "file"
       responses:
         200:
-          description: "OK"
-      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+          description: OK
+
 definitions:
   Processes:
+    description: Object containing the list of processes to preform on the image. Processes will be carried out in the order listed.
     type: "object"
     required:
     - "list_of_Process"
@@ -41,135 +40,401 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Process"
-    description: "Object containing the list of processes to preform on the image.\
-      \ Processes will be carried out in the order listed."
+
   Process:
-    type: "object"
-    required:
-    - "type"
-    discriminator: "type"
+    description: Specification of a single process.
+    type: object
     properties:
       type:
-        type: "string"
-        description: "The type of image processing you want to preform. See enum for\
-          \ list of supported processes."
-        enum:
-        - "rotate"
-        - "scale"
-        - "crop"
-        - "mirror"
-        - "color"
-        - "brightness"
-        - "contrast"
-        - "sharpen"
-        - "blur"
-        - "maxFilter"
-        - "minFilter"
-        - "modeFilter"
-        - "medianFilter"
-        - "edge"
-        - "reformat"
+        description: The type of image processing you want to preform. See enum for list of supported processes.
+        type: string
+        enum: 
+        - rotate
+        - scale
+        - crop
+        - mirror
+        - color
+        - brightness
+        - contrast
+        - sharpen
+        - blur
+        - maxFilter
+        - minFilter
+        - modeFilter
+        - medianFilter
+        - edge
+        - reformat
       list_of_Parameter:
-        type: "array"
-        description: "Parameter list to further specify the process, if necessary."
+        description: Parameter list to further specify the process, if necessary.
+        type: array
         items:
           $ref: "#/definitions/Parameter"
-    description: "Specification of a single process."
-  Parameter:
-    type: "object"
+    discriminator: type
     required:
-    - "parameter"
-    - "value"
+      - type
+
+  Parameter:
+    type: object
     properties:
       parameter:
-        type: "string"
+        type: string
       value:
-        type: "string"
+        type: string
+    required:
+    - parameter
+    - value
+
   Process --> Rotate:
+    description: Rotate image N degrees.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Rotate image N degrees."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Rotate
+          list_of_Parameter:
+            description: Single item list containing the degrees to rotate the image.
+            items:
+              type: object
+              properties:
+                parameter:
+                  description: Number of degrees to rotate.
+                  type: string
+                  enum: 
+                  - degrees
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> Scale:
+    description: Scale an image along the x-axis, y-axis, or both.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Scale an image along the x-axis, y-axis, or both."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Scale
+          list_of_Parameter:
+            description: Provide xsize, ysize, or both.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum: 
+                  - xsize
+                  - ysize
+                  description: Size for the given axis.
+                value:
+                 type: string
+                 description: Converted to type int.
+
   Process --> Crop:
+    description: Crop an image by providing the top left and bottom right corners of the crop.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Crop an image by providing the top left and bottom right corners\
-      \ of the crop."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Crop
+          list_of_Parameter:
+            description: Must provide both (x,y) pairs.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - top_left_x
+                  - top_left_y
+                  - bottom_right_x
+                  - bottom_right_y
+                  description: Specify points.
+                value:
+                 type: string
+                 description: Converted to type int.
+
   Process --> Mirror:
+    description: Return a mirror image of the original image. No parameters.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Return a mirror image of the original image. No parameters."
+      - $ref: "#/definitions/Process"
+      - type: object
+        properties:
+          type:
+            enum: 
+            - Mirror
+
   Process --> Color:
+    description: Can be used to adjust the colour balance of an image, in a manner similar to the controls on a colour TV set. An enhancement factor of 0.0 gives a black and white image. A factor of 1.0 gives the original image.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Can be used to adjust the colour balance of an image, in a manner\
-      \ similar to the controls on a colour TV set. An enhancement factor of 0.0 gives\
-      \ a black and white image. A factor of 1.0 gives the original image."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Color
+          list_of_Parameter:
+            description: Specify factor.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - factor
+                  description: Any valid float value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> Brightness:
+    description: Can be used to control the brightness of an image. An enhancement factor of 0.0 gives a black image. A factor of 1.0 gives the original image.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Can be used to control the brightness of an image. An enhancement\
-      \ factor of 0.0 gives a black image. A factor of 1.0 gives the original image."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Brightness
+          list_of_Parameter:
+            description: Specify factor.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - factor
+                  description: Any valid float value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> Contrast:
+    description: Can be used to control the contrast of an image, similar to the contrast control on a TV set. An enhancement factor of 0.0 gives a solid grey image. A factor of 1.0 gives the original image.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Can be used to control the contrast of an image, similar to the\
-      \ contrast control on a TV set. An enhancement factor of 0.0 gives a solid grey\
-      \ image. A factor of 1.0 gives the original image."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Contrast
+          list_of_Parameter:
+            description: Specify factor.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - factor
+                  description: Any valid float value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> Sharpen:
+    description: Can be used to adjust the sharpness of an image. An enhancement factor of 0.0 gives a blurred image, a factor of 1.0 gives the original image, and a factor of 2.0 gives a sharpened image.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Can be used to adjust the sharpness of an image. An enhancement\
-      \ factor of 0.0 gives a blurred image, a factor of 1.0 gives the original image,\
-      \ and a factor of 2.0 gives a sharpened image."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Sharpen
+          list_of_Parameter:
+            description: Specify factor.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - factor
+                  description: Any valid float value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> Blur:
+    description: Gaussian blur filter.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Gaussian blur filter."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Blur
+          list_of_Parameter:
+            description: Specify radius.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - radius
+                  description: Radius value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> maxFilter:
+    description: Create a max filter. Picks the largest pixel value in a window with the given size.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Create a max filter. Picks the largest pixel value in a window with\
-      \ the given size."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - maxFilter
+          list_of_Parameter:
+            description: Specify size of filter window.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - size
+                  description: Filter size value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> minFilter:
+    description: Create a min filter. Picks the lowest pixel value in a window with the given size.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Create a min filter. Picks the lowest pixel value in a window with\
-      \ the given size."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - minFilter
+          list_of_Parameter:
+            description: Specify size of filter window.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - size
+                  description: Filter size value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> modeFilter:
+    description: Create a mode filter. Picks the mode pixel value in a window with the given size.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Create a mode filter. Picks the mode pixel value in a window with\
-      \ the given size."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - modeFilter
+          list_of_Parameter:
+            description: Specify size of filter window.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - size
+                  description: Filter size value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> medianFilter:
+    description: Create a median filter. Picks the median pixel value in a window with the given size.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Create a median filter. Picks the median pixel value in a window\
-      \ with the given size."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - medianFilter
+          list_of_Parameter:
+            description: Specify size of filter window.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - size
+                  description: Filter size value.
+                value:
+                 type: string
+                 description: Converted to type float.
+
   Process --> Edge:
+    description: Enhance the edges on your image.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Enhance the edges on your image."
+      - $ref: "#/definitions/Process"
+      - type: object
+        properties:
+          type:
+            enum: 
+            - Edge
+
   Process --> Reformat:
+    description: Create a median filter. Picks the median pixel value in a window with the given size.
     allOf:
-    - $ref: "#/definitions/Process"
-    - type: "object"
-    description: "Create a median filter. Picks the median pixel value in a window\
-      \ with the given size."
+      - $ref: "#/definitions/Process"
+      - type: object
+        required:
+        - "list_of_Parameter"
+        properties:
+          type:
+            enum: 
+            - Reformat
+          list_of_Parameter:
+            description: Specify the format to return
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - format
+                  description: Format suffix, as string. See enum for list of supported formats
+                value:
+                 enum:
+                   - jpg
+                   - png
+                   - pdf
+                   - bmp
+                   - gif
+                 type: string
+                 description: Converted to type float.
