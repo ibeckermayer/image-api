@@ -17,12 +17,12 @@ paths:
       - multipart/form-data
       parameters:
       - in: formData
-        name: image
+        name: Image
         type: file
         description: The image.
         required: true
       - in: formData
-        name: processes
+        name: Processes
         type: file
         description: JSON object containing array of Process, in the order they should be preformed. 
         required: true
@@ -41,6 +41,22 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Process"
+        example:
+          - type: Rotate
+            array_of_Parameter:
+              - parameter: degrees
+                value: 30
+          - type: Scale
+            array_of_Parameter:
+              - parameter: xsize
+                value: 30
+          - type: Crop
+            array_of_Parameter:
+              - parameter: top_left_x
+                value: 30
+          - type: Mirror
+            array_of_Parameter:
+          
 
   Process:
     description: Specification of a single process.
@@ -71,6 +87,9 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/Parameter"
+        example:
+          - parameter: degrees
+            value: 30
     discriminator: type
     required:
       - type
