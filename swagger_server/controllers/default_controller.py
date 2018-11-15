@@ -1,10 +1,11 @@
 import connexion
 import six
+from werkzeug.datastructures import FileStorage
 
 from swagger_server import util
 
 
-def image_process_post(image, processes):  # noqa: E501
+def image_process_post(image: FileStorage, processes: FileStorage):  # noqa: E501
     """Takes an image and processes it according to accompanying json.
 
      # noqa: E501
@@ -16,4 +17,5 @@ def image_process_post(image, processes):  # noqa: E501
 
     :rtype: None
     """
+    json = processes.stream.read(-1).decode("utf-8")
     return 'do some magic!'
