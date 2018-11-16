@@ -7,8 +7,13 @@ from yaml import Loader, load
 SWAGGER_URL = '/image/ui'
 SWAGGER_PATH = 'app/swagger/swagger.yaml'
 
+app = Flask(__name__)
+
+@app.route("/image/image-process")
+def hello():
+    return "Hello World!"
+
 def main():
-    app = Flask(__name__)
     swagger_yml = load(open(SWAGGER_PATH, 'r'), Loader=Loader)
     swaggerui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, SWAGGER_PATH, config={'spec': swagger_yml})
     app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
