@@ -11,4 +11,6 @@ def hello():
     if 'Processes' not in request.files:
         return "No Processes specified", 400
     
+    processes = request.files['Processes']
+    print(processes)
     return "WIP", 200
