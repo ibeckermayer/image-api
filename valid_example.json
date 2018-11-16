@@ -1,0 +1,20 @@
+{
+    "array_of_Process": [
+	{
+	    "type": "Rotate",
+	    "array_of_Parameter": [{"parameter": "degrees", "value": 30}]
+	},
+	{
+	    "type": "Scale",
+	    "array_of_Parameter": [{"parameter": "xsize", "value": 30}]
+	},
+	{
+	    "type": "Crop",
+	    "array_of_Parameter": [{"parameter": "top_left_x", "value": 30}]
+	},
+	{
+	    "type": "Mirror",
+	    "array_of_Parameter": null
+	}
+    ]
+}
