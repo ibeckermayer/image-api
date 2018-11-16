@@ -5,7 +5,10 @@ app = Flask(__name__)
 
 @app.route("/image/image-process", methods=['POST'])
 def hello():
-    if 'file' not in request.files:
-        return "No file"
-    else:
-        return "found file"
+    if 'Image' not in request.files:
+        return "No Image specified", 400
+
+    if 'Processes' not in request.files:
+        return "No Processes specified", 400
+    
+    return "WIP", 200
