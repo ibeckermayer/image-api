@@ -1,7 +1,11 @@
-import connexion
-import six
+from app import util
+from flask import Flask
 
-from swagger_server import util
+app = Flask(__name__)
+
+@app.route("/image/image-process")
+def hello():
+    return "Hello World!"
 
 
 def image_process_post(image, processes):  # noqa: E501
