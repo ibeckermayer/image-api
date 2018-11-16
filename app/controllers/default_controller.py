@@ -14,7 +14,7 @@ def hello():
 
     if 'Processes' not in request.files:
         return "No Processes specified", 400
-    
+
     processes = deserialize(request.files['Processes'])
     image = loadImage(request.files['Image'])
 
@@ -30,7 +30,7 @@ def deserialize(processes: FileStorage):
 
 def loadImage(imageUpload: FileStorage):
     in_memory_file = io.BytesIO()
-    imageUpload.save(in_memory_file)    
+    imageUpload.save(in_memory_file)
     image = Image.open(in_memory_file)
     image.show()
     return image
