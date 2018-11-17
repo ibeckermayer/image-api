@@ -11,7 +11,7 @@ from app.models.process import Process  # noqa: F401,E501
 from app import util
 
 
-class ProcessCrop(Model):
+class ProcessCrop(Process):
     def __init__(self, name: str=None, array_of_parameter: List[Parameter]=None):  # noqa: E501
         """ProcessCrop - a model defined in Swagger
 
