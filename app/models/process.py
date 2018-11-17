@@ -106,3 +106,5 @@ class Process(Model):
         """
         if self._name is None:
             raise ValueError('Process improperly formed. Each Process must have property "name".')
+        for parameter in self._array_of_parameter:
+            parameter.verify_parameter()

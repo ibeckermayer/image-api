@@ -92,3 +92,9 @@ class Parameter(Model):
             raise ValueError("Invalid value for `value`, must not be `None`")  # noqa: E501
 
         self._value = value
+
+    def verify_parameter(self):
+        if self._parameter is None:
+            raise ValueError('Parameter improperly formed. Each Parameter must have property "parameter".')
+        if self._value is None:
+            raise ValueError('Parameter improperly formed. Each Parameter must have property "value".')
