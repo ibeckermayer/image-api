@@ -43,19 +43,19 @@ def contrast(factor: float) -> Callable[[Image], Image]:
 def sharpen(factor: float) -> Callable[[Image], Image]:
     return _enhance(ImageEnhance.Sharpness, factor)
 
-def blur(radius: int = 2) -> Callable[[Image], Image]:
+def blur(radius: int) -> Callable[[Image], Image]:
     return lambda image: image.filter(ImageFilter.GaussianBlur(radius))
 
-def maxFilter(size: int = 3) -> Callable[[Image], Image]:
+def maxFilter(size: int) -> Callable[[Image], Image]:
     return lambda image: image.filter(ImageFilter.MaxFilter(size))
 
-def minFilter(size: int = 3) -> Callable[[Image], Image]:
+def minFilter(size: int) -> Callable[[Image], Image]:
     return lambda image: image.filter(ImageFilter.MinFilter(size))
 
-def modeFilter(size: int = 3) -> Callable[[Image], Image]:
+def modeFilter(size: int) -> Callable[[Image], Image]:
     return lambda image: image.filter(ImageFilter.ModeFilter(size))
 
-def medianFilter(size: int = 3) -> Callable[[Image], Image]:
+def medianFilter(size: int) -> Callable[[Image], Image]:
     return lambda image: image.filter(ImageFilter.MedianFilter(size))
 
 def edge() -> Callable[[Image], Image]:
