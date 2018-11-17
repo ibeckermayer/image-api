@@ -17,26 +17,26 @@ class ProcessMedianFilter(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, type: str=None, list_of_parameter: List[Parameter]=None):  # noqa: E501
+    def __init__(self, type: str=None, array_of_parameter: List[Parameter]=None):  # noqa: E501
         """ProcessMedianFilter - a model defined in Swagger
 
         :param type: The type of this ProcessMedianFilter.  # noqa: E501
         :type type: str
-        :param list_of_parameter: The list_of_parameter of this ProcessMedianFilter.  # noqa: E501
-        :type list_of_parameter: List[Parameter]
+        :param array_of_parameter: The array_of_parameter of this ProcessMedianFilter.  # noqa: E501
+        :type array_of_parameter: List[Parameter]
         """
         self.swagger_types = {
             'type': str,
-            'list_of_parameter': List[Parameter]
+            'array_of_parameter': List[Parameter]
         }
 
         self.attribute_map = {
             'type': 'type',
-            'list_of_parameter': 'list_of_Parameter'
+            'array_of_parameter': 'array_of_Parameter'
         }
 
         self._type = type
-        self._list_of_parameter = list_of_parameter
+        self._array_of_parameter = array_of_parameter
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessMedianFilter':
@@ -53,7 +53,7 @@ class ProcessMedianFilter(Model):
     def type(self) -> str:
         """Gets the type of this ProcessMedianFilter.
 
-        The type of image processing you want to preform. See enum for list of supported processes.  # noqa: E501
+        The type of image processing you want to preform. See Enum for array of supported processes.  # noqa: E501
 
         :return: The type of this ProcessMedianFilter.
         :rtype: str
@@ -64,12 +64,12 @@ class ProcessMedianFilter(Model):
     def type(self, type: str):
         """Sets the type of this ProcessMedianFilter.
 
-        The type of image processing you want to preform. See enum for list of supported processes.  # noqa: E501
+        The type of image processing you want to preform. See Enum for array of supported processes.  # noqa: E501
 
         :param type: The type of this ProcessMedianFilter.
         :type type: str
         """
-        allowed_values = ["rotate", "scale", "crop", "mirror", "color", "brightness", "contrast", "sharpen", "blur", "maxFilter", "minFilter", "modeFilter", "medianFilter", "edge", "reformat"]  # noqa: E501
+        allowed_values = ["Rotate", "Scale", "Crop", "Mirror", "Color", "Brightness", "Contrast", "Sharpen", "Blur", "maxFilter", "minFilter", "modeFilter", "medianFilter", "Edge", "Reformat"]  # noqa: E501
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"
@@ -79,24 +79,24 @@ class ProcessMedianFilter(Model):
         self._type = type
 
     @property
-    def list_of_parameter(self) -> List[Parameter]:
-        """Gets the list_of_parameter of this ProcessMedianFilter.
+    def array_of_parameter(self) -> List[Parameter]:
+        """Gets the array_of_parameter of this ProcessMedianFilter.
 
-        Parameter list to further specify the process, if necessary.  # noqa: E501
+        Parameter array to further specify the process, if necessary.  # noqa: E501
 
-        :return: The list_of_parameter of this ProcessMedianFilter.
+        :return: The array_of_parameter of this ProcessMedianFilter.
         :rtype: List[Parameter]
         """
-        return self._list_of_parameter
+        return self._array_of_parameter
 
-    @list_of_parameter.setter
-    def list_of_parameter(self, list_of_parameter: List[Parameter]):
-        """Sets the list_of_parameter of this ProcessMedianFilter.
+    @array_of_parameter.setter
+    def array_of_parameter(self, array_of_parameter: List[Parameter]):
+        """Sets the array_of_parameter of this ProcessMedianFilter.
 
-        Parameter list to further specify the process, if necessary.  # noqa: E501
+        Parameter array to further specify the process, if necessary.  # noqa: E501
 
-        :param list_of_parameter: The list_of_parameter of this ProcessMedianFilter.
-        :type list_of_parameter: List[Parameter]
+        :param array_of_parameter: The array_of_parameter of this ProcessMedianFilter.
+        :type array_of_parameter: List[Parameter]
         """
 
-        self._list_of_parameter = list_of_parameter
+        self._array_of_parameter = array_of_parameter

@@ -16,21 +16,21 @@ class Processes(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, list_of_process: List[Process]=None):  # noqa: E501
+    def __init__(self, array_of_process: List[Process]=None):  # noqa: E501
         """Processes - a model defined in Swagger
 
-        :param list_of_process: The list_of_process of this Processes.  # noqa: E501
-        :type list_of_process: List[Process]
+        :param array_of_process: The array_of_process of this Processes.  # noqa: E501
+        :type array_of_process: List[Process]
         """
         self.swagger_types = {
-            'list_of_process': List[Process]
+            'array_of_process': List[Process]
         }
 
         self.attribute_map = {
-            'list_of_process': 'list_of_Process'
+            'array_of_process': 'array_of_Process'
         }
 
-        self._list_of_process = list_of_process
+        self._array_of_process = array_of_process
 
     @classmethod
     def from_dict(cls, dikt) -> 'Processes':
@@ -44,24 +44,24 @@ class Processes(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def list_of_process(self) -> List[Process]:
-        """Gets the list_of_process of this Processes.
+    def array_of_process(self) -> List[Process]:
+        """Gets the array_of_process of this Processes.
 
 
-        :return: The list_of_process of this Processes.
+        :return: The array_of_process of this Processes.
         :rtype: List[Process]
         """
-        return self._list_of_process
+        return self._array_of_process
 
-    @list_of_process.setter
-    def list_of_process(self, list_of_process: List[Process]):
-        """Sets the list_of_process of this Processes.
+    @array_of_process.setter
+    def array_of_process(self, array_of_process: List[Process]):
+        """Sets the array_of_process of this Processes.
 
 
-        :param list_of_process: The list_of_process of this Processes.
-        :type list_of_process: List[Process]
+        :param array_of_process: The array_of_process of this Processes.
+        :type array_of_process: List[Process]
         """
-        if list_of_process is None:
-            raise ValueError("Invalid value for `list_of_process`, must not be `None`")  # noqa: E501
+        if array_of_process is None:
+            raise ValueError("Invalid value for `array_of_process`, must not be `None`")  # noqa: E501
 
-        self._list_of_process = list_of_process
+        self._array_of_process = array_of_process
