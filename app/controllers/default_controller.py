@@ -29,16 +29,19 @@ app = Flask(__name__)
 
 @app.route("/image/image-process", methods=['POST'])
 def image_process():
+    # check for valid request body
     if 'Image' not in request.files:
         return "No Image specified", 400
-
     if 'Processes' not in request.files:
         return "No Processes specified", 400
 
+    # check for valid file formats
     processes = deserialize(request.files['Processes'])
+    if processes is None:
+        return "Invalid JSON format for Processes", 400
     image = loadImage(request.files['Image'])
-
-    parseJSON(processes)
+    if image is None:
+        return "Invalid image format for Image", 400
 
     return process(processes, image)
 
@@ -46,17 +49,16 @@ def process(processes, image: Image):
     return "WIP", 200
 
 def deserialize(processes: FileStorage):
-    json = processes.stream.read(-1).decode('utf-8')
-    return json
-
+    try:
+        return json.load(processes)
+    except:
+        return None
 
 def loadImage(imageUpload: FileStorage):
-    in_memory_file = io.BytesIO()
-    imageUpload.save(in_memory_file)
-    image = Image.open(in_memory_file)
-    # image.show()
+    try:
+        in_memory_file = io.BytesIO()
+        imageUpload.save(in_memory_file)
+        image = Image.open(in_memory_file)
+    except:
+        image = None
     return image
-
-def parseJSON(json_string: str):
-    processes = json.loads(json_string)
-    # print(processes)

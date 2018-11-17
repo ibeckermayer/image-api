@@ -1,20 +1,155 @@
 {
-    "array_of_Process": [
+    "array_of_Process":
+    [
 	{
 	    "type": "Rotate",
-	    "array_of_Parameter": [{"parameter": "degrees", "value": 30}]
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "degrees",
+		    "value": "30"
+		}
+	    ]
 	},
 	{
 	    "type": "Scale",
-	    "array_of_Parameter": [{"parameter": "xsize", "value": 30}]
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "xsize",
+		    "value": "30"
+		}
+	    ]
 	},
 	{
 	    "type": "Crop",
-	    "array_of_Parameter": [{"parameter": "top_left_x", "value": 30}]
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "top_left_x",
+		    "value": "30"
+		},
+		{
+		    "parameter": "top_left_y",
+		    "value": "30"
+		},
+		{
+		    "parameter": "bottom_right_x",
+		    "value": "60"
+		},
+		{
+		    "parameter": "bottom_right_y",
+		    "value": "60"
+		}
+	    ]
 	},
 	{
 	    "type": "Mirror",
 	    "array_of_Parameter": null
+	},
+	{
+	    "type": "Color",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "factor",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "Brightness",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "factor",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "Contrast",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "factor",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "Sharpen",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "factor",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "Blur",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "radius",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "maxFilter",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "size",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "minFilter",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "size",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "modeFilter",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "size",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "medianFilter",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "size",
+		    "value": "1.7"
+		}
+	    ]
+	},
+	{
+	    "type": "Edge",
+	    "array_of_Parameter": null
+	},
+	{
+	    "type": "Reformat",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "format",
+		    "value": "png"
+		}
+	    ]
 	}
     ]
 }

@@ -68,7 +68,7 @@ class Process(Model):
         :param type: The type of this Process.
         :type type: str
         """
-        allowed_values = ["rotate", "scale", "crop", "mirror", "color", "brightness", "contrast", "sharpen", "blur", "maxFilter", "minFilter", "modeFilter", "medianFilter", "edge", "reformat"]  # noqa: E501
+        allowed_values = ["Rotate", "Scale", "Crop", "Mirror", "Color", "Brightness", "Contrast", "Sharpen", "Blur", "maxFilter", "minFilter", "modeFilter", "medianFilter", "Edge", "Reformat"]  # noqa: E501
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"

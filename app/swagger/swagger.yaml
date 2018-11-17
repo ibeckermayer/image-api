@@ -45,18 +45,65 @@ definitions:
           - type: Rotate
             array_of_Parameter:
               - parameter: degrees
-                value: 30
+                value: "30"
           - type: Scale
             array_of_Parameter:
               - parameter: xsize
-                value: 30
+                value: "30"
           - type: Crop
             array_of_Parameter:
               - parameter: top_left_x
-                value: 30
+                value: "30"
+              - parameter: top_left_y
+                value: "30"
+              - parameter: bottom_right_x
+                value: "60"
+              - parameter: bottom_right_y
+                value: "60"
           - type: Mirror
             array_of_Parameter:
-          
+          - type: Color
+            array_of_Parameter:
+              - parameter: factor
+                value: "1.7"
+          - type: Brightness
+            array_of_Parameter:
+              - parameter: factor
+                value: "1.7"
+          - type: Contrast
+            array_of_Parameter:
+              - parameter: factor
+                value: "1.7"
+          - type: Sharpen
+            array_of_Parameter:
+              - parameter: factor
+                value: "1.7"
+          - type: Blur
+            array_of_Parameter:
+              - parameter: radius
+                value: "1.7"
+          - type: maxFilter
+            array_of_Parameter:
+              - parameter: size
+                value: "1.7"
+          - type: minFilter
+            array_of_Parameter:
+              - parameter: size
+                value: "1.7"
+          - type: modeFilter
+            array_of_Parameter:
+              - parameter: size
+                value: "1.7"
+          - type: medianFilter
+            array_of_Parameter:
+              - parameter: size
+                value: "1.7"
+          - type: Edge
+            array_of_Parameter:
+          - type: Reformat
+            array_of_Parameter:
+              - parameter: format
+                value: "png"
 
   Process:
     description: Specification of a single process.
@@ -89,7 +136,7 @@ definitions:
           $ref: "#/definitions/Parameter"
         example:
           - parameter: degrees
-            value: 30
+            value: "30"
     discriminator: type
     required:
       - type
@@ -103,7 +150,7 @@ definitions:
         example: degrees
       value:
         type: string
-        example: 30
+        example: "30"
     required:
     - parameter
     - value
@@ -159,7 +206,7 @@ definitions:
                   example: xsize
                 value:
                  type: string
-                 example: 30
+                 example: "30"
                  description: Converted to type int.
 
   Process --> Crop:
@@ -191,7 +238,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type int.
-                 example: 30
+                 example: "30"
 
   Process --> Mirror:
     description: Return a mirror image of the original image. No parameters.
@@ -230,7 +277,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type float.
-                 example: 1.7
+                 example: "1.7"
 
   Process --> Brightness:
     description: Can be used to control the brightness of an image. An enhancement factor of 0.0 gives a black image. A factor of 1.0 gives the original image.
@@ -257,7 +304,7 @@ definitions:
                   example: factor
                 value:
                  type: string
-                 example: 1.7
+                 example: "1.7"
                  description: Converted to type float.
 
   Process --> Contrast:
@@ -286,7 +333,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type float.
-                 example: 1.7
+                 example: "1.7"
 
   Process --> Sharpen:
     description: Can be used to adjust the sharpness of an image. An enhancement factor of 0.0 gives a blurred image, a factor of 1.0 gives the original image, and a factor of 2.0 gives a sharpened image.
@@ -314,7 +361,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type float.
-                 example: 1.7
+                 example: "1.7"
 
   Process --> Blur:
     description: Gaussian blur filter.
@@ -342,7 +389,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type float.
-                 example: 1.7
+                 example: "1.7"
 
   Process --> maxFilter:
     description: Create a max filter. Picks the largest pixel value in a window with the given size.
@@ -370,7 +417,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type float.
-                 example: 1.7
+                 example: "1.7"
 
   Process --> minFilter:
     description: Create a min filter. Picks the lowest pixel value in a window with the given size.
@@ -398,7 +445,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type float.
-                 example: 1.7
+                 example: "1.7"
 
   Process --> modeFilter:
     description: Create a mode filter. Picks the mode pixel value in a window with the given size.
@@ -426,7 +473,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type float.
-                 example: 1.7
+                 example: "1.7"
 
   Process --> medianFilter:
     description: Create a median filter. Picks the median pixel value in a window with the given size.
@@ -454,7 +501,7 @@ definitions:
                 value:
                  type: string
                  description: Converted to type float.
-                 example: 1.7
+                 example: "1.7"
 
   Process --> Edge:
     description: Enhance the edges on your image.
