@@ -42,15 +42,15 @@ definitions:
         items:
           $ref: "#/definitions/Process"
         example:
-          - type: Rotate
+          - name: Rotate
             array_of_Parameter:
               - parameter: degrees
                 value: "30"
-          - type: Scale
+          - name: Scale
             array_of_Parameter:
               - parameter: xsize
                 value: "30"
-          - type: Crop
+          - name: Crop
             array_of_Parameter:
               - parameter: top_left_x
                 value: "30"
@@ -60,47 +60,47 @@ definitions:
                 value: "60"
               - parameter: bottom_right_y
                 value: "60"
-          - type: Mirror
+          - name: Mirror
             array_of_Parameter:
-          - type: Color
-            array_of_Parameter:
-              - parameter: factor
-                value: "1.7"
-          - type: Brightness
+          - name: Color
             array_of_Parameter:
               - parameter: factor
                 value: "1.7"
-          - type: Contrast
+          - name: Brightness
             array_of_Parameter:
               - parameter: factor
                 value: "1.7"
-          - type: Sharpen
+          - name: Contrast
             array_of_Parameter:
               - parameter: factor
                 value: "1.7"
-          - type: Blur
+          - name: Sharpen
+            array_of_Parameter:
+              - parameter: factor
+                value: "1.7"
+          - name: Blur
             array_of_Parameter:
               - parameter: radius
                 value: "1.7"
-          - type: maxFilter
+          - name: maxFilter
             array_of_Parameter:
               - parameter: size
                 value: "1.7"
-          - type: minFilter
+          - name: minFilter
             array_of_Parameter:
               - parameter: size
                 value: "1.7"
-          - type: modeFilter
+          - name: modeFilter
             array_of_Parameter:
               - parameter: size
                 value: "1.7"
-          - type: medianFilter
+          - name: medianFilter
             array_of_Parameter:
               - parameter: size
                 value: "1.7"
-          - type: Edge
+          - name: Edge
             array_of_Parameter:
-          - type: Reformat
+          - name: Reformat
             array_of_Parameter:
               - parameter: format
                 value: "png"
@@ -109,8 +109,8 @@ definitions:
     description: Specification of a single process.
     type: object
     properties:
-      type:
-        description: The type of image processing you want to preform. See Enum for array of supported processes.
+      name:
+        description: The name of image processing you want to preform. See Enum for array of supported processes.
         type: string
         example: Rotate
         enum: 
@@ -137,9 +137,9 @@ definitions:
         example:
           - parameter: degrees
             value: "30"
-    discriminator: type
+    discriminator: name
     required:
-      - type
+      - name
 
   Parameter:
     description: General definition for a Parameter. See extended Process definitions below for 
@@ -163,7 +163,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Rotate
           array_of_Parameter:
@@ -188,7 +188,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Scale
             example: Scale
@@ -217,7 +217,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Crop
             example: Crop
@@ -246,7 +246,7 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         properties:
-          type:
+          name:
             enum: 
             - Mirror
             example: Mirror
@@ -259,7 +259,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Color
             example: Color
@@ -287,7 +287,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Brightness
             example: Brightness
@@ -315,7 +315,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Contrast
             example: Contrast
@@ -343,7 +343,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Sharpen
             example: Sharpen
@@ -371,7 +371,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Blur
             example: Blur
@@ -399,7 +399,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - maxFilter
             example: maxFilter
@@ -427,7 +427,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - minFilter
             example: minFilter
@@ -455,7 +455,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - modeFilter
             example: modeFilter
@@ -483,7 +483,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - medianFilter
             example: medianFilter
@@ -509,7 +509,7 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         properties:
-          type:
+          name:
             enum: 
             - Edge
             example: Edge
@@ -522,7 +522,7 @@ definitions:
         required:
         - "array_of_Parameter"
         properties:
-          type:
+          name:
             enum: 
             - Reformat
             example: Reformat

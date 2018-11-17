@@ -16,25 +16,25 @@ class Process(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, type: str=None, array_of_parameter: List[Parameter]=None):  # noqa: E501
+    def __init__(self, name: str=None, array_of_parameter: List[Parameter]=None):  # noqa: E501
         """Process - a model defined in Swagger
 
-        :param type: The type of this Process.  # noqa: E501
-        :type type: str
+        :param name: The name of this Process.  # noqa: E501
+        :type name: str
         :param array_of_parameter: The array_of_parameter of this Process.  # noqa: E501
         :type array_of_parameter: List[Parameter]
         """
         self.swagger_types = {
-            'type': str,
+            'name': str,
             'array_of_parameter': List[Parameter]
         }
 
         self.attribute_map = {
-            'type': 'type',
+            'name': 'name',
             'array_of_parameter': 'array_of_Parameter'
         }
 
-        self._type = type
+        self._name = name
         self._array_of_parameter = array_of_parameter
 
     @classmethod
@@ -49,33 +49,33 @@ class Process(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def type(self) -> str:
-        """Gets the type of this Process.
+    def name(self) -> str:
+        """Gets the name of this Process.
 
-        The type of image processing you want to preform. See Enum for array of supported processes.  # noqa: E501
+        The name of image processing you want to preform. See Enum for array of supported processes.  # noqa: E501
 
-        :return: The type of this Process.
+        :return: The name of this Process.
         :rtype: str
         """
-        return self._type
+        return self._name
 
-    @type.setter
-    def type(self, type: str):
-        """Sets the type of this Process.
+    @name.setter
+    def name(self, name: str):
+        """Sets the name of this Process.
 
-        The type of image processing you want to preform. See Enum for array of supported processes.  # noqa: E501
+        The name of image processing you want to preform. See Enum for array of supported processes.  # noqa: E501
 
-        :param type: The type of this Process.
-        :type type: str
+        :param name: The name of this Process.
+        :type name: str
         """
         allowed_values = ["Rotate", "Scale", "Crop", "Mirror", "Color", "Brightness", "Contrast", "Sharpen", "Blur", "maxFilter", "minFilter", "modeFilter", "medianFilter", "Edge", "Reformat"]  # noqa: E501
-        if type not in allowed_values:
+        if name not in allowed_values:
             raise ValueError(
-                "Invalid value for `type` ({0}), must be one of {1}"
-                .format(type, allowed_values)
+                "Invalid value for `name` ({0}), must be one of {1}"
+                .format(name, allowed_values)
             )
 
-        self._type = type
+        self._name = name
 
     @property
     def array_of_parameter(self) -> List[Parameter]:

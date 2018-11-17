@@ -2,7 +2,7 @@
     "array_of_Process":
     [
 	{
-	    "type": "Rotate",
+	    "name": "Rotate",
 	    "array_of_Parameter":
 	    [
 		{
@@ -12,7 +12,7 @@
 	    ]
 	},
 	{
-	    "type": "Scale",
+	    "name": "Scale",
 	    "array_of_Parameter":
 	    [
 		{
@@ -22,7 +22,7 @@
 	    ]
 	},
 	{
-	    "type": "Crop",
+	    "name": "Crop",
 	    "array_of_Parameter":
 	    [
 		{
@@ -44,11 +44,11 @@
 	    ]
 	},
 	{
-	    "type": "Mirror",
+	    "name": "Mirror",
 	    "array_of_Parameter": null
 	},
 	{
-	    "type": "Color",
+	    "name": "Color",
 	    "array_of_Parameter":
 	    [
 		{
@@ -58,7 +58,7 @@
 	    ]
 	},
 	{
-	    "type": "Brightness",
+	    "name": "Brightness",
 	    "array_of_Parameter":
 	    [
 		{
@@ -68,7 +68,7 @@
 	    ]
 	},
 	{
-	    "type": "Contrast",
+	    "name": "Contrast",
 	    "array_of_Parameter":
 	    [
 		{
@@ -78,7 +78,7 @@
 	    ]
 	},
 	{
-	    "type": "Sharpen",
+	    "name": "Sharpen",
 	    "array_of_Parameter":
 	    [
 		{
@@ -88,7 +88,7 @@
 	    ]
 	},
 	{
-	    "type": "Blur",
+	    "name": "Blur",
 	    "array_of_Parameter":
 	    [
 		{
@@ -98,7 +98,7 @@
 	    ]
 	},
 	{
-	    "type": "maxFilter",
+	    "name": "maxFilter",
 	    "array_of_Parameter":
 	    [
 		{
@@ -108,7 +108,7 @@
 	    ]
 	},
 	{
-	    "type": "minFilter",
+	    "name": "minFilter",
 	    "array_of_Parameter":
 	    [
 		{
@@ -118,7 +118,7 @@
 	    ]
 	},
 	{
-	    "type": "modeFilter",
+	    "name": "modeFilter",
 	    "array_of_Parameter":
 	    [
 		{
@@ -128,7 +128,7 @@
 	    ]
 	},
 	{
-	    "type": "medianFilter",
+	    "name": "medianFilter",
 	    "array_of_Parameter":
 	    [
 		{
@@ -138,11 +138,11 @@
 	    ]
 	},
 	{
-	    "type": "Edge",
+	    "name": "Edge",
 	    "array_of_Parameter": null
 	},
 	{
-	    "type": "Reformat",
+	    "name": "Reformat",
 	    "array_of_Parameter":
 	    [
 		{

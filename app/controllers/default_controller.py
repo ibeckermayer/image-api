@@ -35,20 +35,52 @@ def image_process():
     if 'Processes' not in request.files:
         return "No Processes specified", 400
 
-    # check for valid file formats
-    processes = deserialize(request.files['Processes'])
-    if processes is None:
-        return "Invalid JSON format for Processes", 400
+    # check for valid image
     image = loadImage(request.files['Image'])
     if image is None:
         return "Invalid image format for Image", 400
+
+
+    # check for valid json
+    processes_dict = json_to_dict(request.files['Processes'])
+    if processes_dict is None:
+        return "Invalid JSON format for Processes", 400
+
+    # convert to Processes object
+    try:
+        processes_obj = Processes.from_dict(processes_dict)
+        if processes_obj.array_of_process == None:
+            return 'Invalid JSON: JSON must have property "array_of_Process"'
+    except Exception as e:
+        return str(e), 400
+
+    try:
+        # TODO:
+        # Go through each Process, check that it has a name, if not throw error.
+
+        # If it has a name, check that it has an array_of_parameter if necessary. If not, throw error.
+
+        # If it has a list_of_parameter, make sure that each parameter in that list is properly formed (no missing fields). If not, throw error.
+
+        # If it has necessary list of parameter and each parameter is properly formed, check that it has the correct parameters based on the
+        # name of the process. If not, throw error.
+
+        # If it has necessary list of parameter and each parameter is properly formed and the parameters are correct based on the name of the
+        # process, check that the value of the parameter is correct based on the name ("parameter" property) of the parameters.
+
+        # If all of those pass, call the appropriate operation function in a list. If you get all the way through
+        # and don't get any errors, return that list. Now that you have that list, throw it through the process
+        # function with the image, and return that image.
+        processes = None
+    except Exception as e:
+        return str(e), 400
 
     return process(processes, image)
 
 def process(processes, image: Image):
     return "WIP", 200
 
-def deserialize(processes: FileStorage):
+def json_to_dict(processes: FileStorage):
     try:
         return json.load(processes)
     except:
