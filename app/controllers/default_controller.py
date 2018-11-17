@@ -48,8 +48,8 @@ def image_process():
 
     # convert to Processes object
     try:
-        processes_obj = Processes.from_dict(processes_dict)
-        if processes_obj.array_of_process == None:
+        processes = Processes.from_dict(processes_dict)
+        if processes.array_of_process == None:
             return 'Invalid JSON: JSON must have property "array_of_Process"'
     except Exception as e:
         return str(e), 400
@@ -71,6 +71,7 @@ def image_process():
         # If all of those pass, call the appropriate operation function in a list. If you get all the way through
         # and don't get any errors, return that list. Now that you have that list, throw it through the process
         # function with the image, and return that image.
+        return processes.run()
         processes = None
     except Exception as e:
         return str(e), 400

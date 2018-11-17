@@ -65,3 +65,17 @@ class Processes(Model):
             raise ValueError("Invalid value for `array_of_process`, must not be `None`")  # noqa: E501
 
         self._array_of_process = array_of_process
+
+    def run(self, image: Image):
+        """verifies the Processes and then runs each of them on the image.
+        """
+        return self._pipeline(image, self._verify_processes())
+
+    def _pipeline(self, image: Image, operations: [Callable[[Image], Image]]) -> Image:
+        return reduce(lambda last, operation: operation(last), operations, image)
+
+    def _verify_processes(self): -> List[Operation]
+        """Verifies the validity of each Process in self._array_of_process
+
+        :return: a list of Operation
+        """
