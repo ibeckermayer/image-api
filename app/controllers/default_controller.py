@@ -35,11 +35,12 @@ def image_process():
     if 'Processes' not in request.files:
         return "No Processes specified", 400
 
+    print("has fields")
+
     # check for valid image
     image = loadImage(request.files['Image'])
     if image is None:
         return "Invalid image format for Image", 400
-
 
     # check for valid json
     processes_dict = json_to_dict(request.files['Processes'])
@@ -47,10 +48,12 @@ def image_process():
         return "Invalid JSON format for Processes", 400
 
     # convert to Processes object
-    try:
-        processes = Processes.from_dict(processes_dict)
-        if processes.array_of_process == None:
+    try:            
+        if not "array_of_Process" in processes_dict:
             return 'Invalid JSON: JSON must have property "array_of_Process"'
+
+        processes = [dict_to_process(x) for x in processes_dict["array_of_Process"]]
+        print(processes)
     except Exception as e:
         return str(e), 400
 
@@ -81,6 +84,10 @@ def image_process():
 def process(processes, image: Image):
     return "WIP", 200
 
+def dict_to_process(obj) -> Process:
+    klass = lookupType(obj["name"])
+    return klass(obj["array_of_Parameter"])
+
 def json_to_dict(processes: FileStorage):
     try:
         return json.load(processes)
@@ -95,3 +102,26 @@ def loadImage(imageUpload: FileStorage):
     except:
         image = None
     return image
+
+typeTable = {
+ "Rotate": ProcessRotate, 
+ "Scale": ProcessScale, 
+ "Crop": ProcessCrop, 
+ "Mirror": ProcessMirror, 
+ "Color": ProcessColor, 
+ "Brightness": ProcessBrightness, 
+ "Contrast": ProcessContrast, 
+ "Sharpen": ProcessSharpen, 
+ "Blur": ProcessBlur, 
+ "maxFilter": ProcessMaxFilter, 
+ "minFilter": ProcessMinFilter, 
+ "modeFilter": ProcessModeFilter, 
+ "medianFilter": ProcessMedianFilter, 
+ "Edge": ProcessEdge, 
+ "Reformat": ProcessReformat   
+}
+
+def lookupType(operationName):
+    if not operationName in typeTable:
+        raise ValueError(operationName + " is not a valid type")
+    return typeTable[operationName]
