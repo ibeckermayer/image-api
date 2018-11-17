@@ -99,3 +99,10 @@ class Process(Model):
         """
 
         self._array_of_parameter = array_of_parameter
+
+    def verify_process_get_operation(self):
+        """Verifies the process is properly formed and returns the appropriate operation.
+        If it's not properly formed, raises error.
+        """
+        if self._name is None:
+            raise ValueError('Process improperly formed. Each Process must have property "name".')
