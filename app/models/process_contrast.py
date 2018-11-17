@@ -33,26 +33,3 @@ class ProcessContrast(Process):
         :rtype: ProcessContrast
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def array_of_parameter(self) -> List[Parameter]:
-        """Gets the array_of_parameter of this ProcessContrast.
-
-        Parameter array to further specify the process, if necessary.  # noqa: E501
-
-        :return: The array_of_parameter of this ProcessContrast.
-        :rtype: List[Parameter]
-        """
-        return self._array_of_parameter
-
-    @array_of_parameter.setter
-    def array_of_parameter(self, array_of_parameter: List[Parameter]):
-        """Sets the array_of_parameter of this ProcessContrast.
-
-        Parameter array to further specify the process, if necessary.  # noqa: E501
-
-        :param array_of_parameter: The array_of_parameter of this ProcessContrast.
-        :type array_of_parameter: List[Parameter]
-        """
-
-        self._array_of_parameter = array_of_parameter
