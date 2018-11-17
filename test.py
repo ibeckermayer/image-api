@@ -1,6 +1,18 @@
 from operations import rotate, scale, crop, mirror, pipeline, color, brightness, contrast, sharpen, blur, maxFilter, minFilter, maxFilter, modeFilter, edge, Flip
 from PIL import Image
 
+class Shit(object):
+    def __init__(self):
+        print("I got inited!")
+    pass
+
+def giveMeShit():
+    print("I got shitted")
+    return Shit
+
+print(giveMeShit())
+print(giveMeShit()())
+
 im = Image.open("kek.jpg")
 
 rotated = pipeline(im, [
