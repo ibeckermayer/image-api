@@ -85,6 +85,9 @@ def process(processes, image: Image):
     return "WIP", 200
 
 def dict_to_process(obj) -> Process:
+    if not "name" in obj:
+        raise ValueError("Process is missing the required field 'name'")
+
     klass = lookupType(obj["name"])
     return klass(obj["array_of_Parameter"])
 
