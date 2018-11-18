@@ -4,6 +4,7 @@ from PIL import ImageFilter
 from typing import Callable, Tuple, Union
 from functools import reduce
 from enum import Enum
+from app.models.process import Process
 
 class Flip(Enum):
     Horizontal = FLIP_LEFT_RIGHT
@@ -64,5 +65,5 @@ def edge() -> Callable[[Image], Image]:
 def _enhance(enhancer, factor):
     return lambda image: enhancer(image).enhance(factor)
 
-def pipeline(image: Image, operations: [Callable[[Image], Image]]) -> Image:
-    return reduce(lambda last, operation: operation(last), operations, image)
+def pipeline(image: Image, operations: [Process]) -> Image:
+    return reduce(lambda last, operation: operation.apply(last), operations, image)

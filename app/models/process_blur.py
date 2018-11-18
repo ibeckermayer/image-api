@@ -10,6 +10,8 @@ from app.models.parameter import Parameter  # noqa: F401,E501
 from app.models.process import Process  # noqa: F401,E501
 from app import util
 
+from app.operations import blur
+from PIL import Image
 
 class ProcessBlur(Process):
     def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
@@ -29,6 +31,9 @@ class ProcessBlur(Process):
             self.radius = float(Parameter.lookup(array_of_parameter, "radius").get("value"))
         except Exception:
             raise ValueError("Parameter \"radius\" must have a string \"value\" that can be converted to float.")
+
+    def apply(self, image: Image) -> Image:
+        return blur(self.radius)(image)
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessBlur':

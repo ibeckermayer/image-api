@@ -4,6 +4,9 @@ from app import util
 from flask import Flask, request
 from werkzeug.datastructures import FileStorage
 from PIL import Image
+
+from app.operations import pipeline
+
 from app.models import Parameter
 from app.models import Process
 from app.models import ProcessBlur
@@ -53,7 +56,6 @@ def image_process():
             return 'Invalid JSON: JSON must have property "array_of_Process"'
 
         processes = [dict_to_process(x) for x in processes_dict["array_of_Process"]]
-        print(processes)
     except Exception as e:
         return str(e), 400
 
@@ -74,8 +76,7 @@ def image_process():
         # If all of those pass, call the appropriate operation function in a list. If you get all the way through
         # and don't get any errors, return that list. Now that you have that list, throw it through the process
         # function with the image, and return that image.
-        return processes.run(image)
-        processes = None
+        
     except Exception as e:
         return str(e), 400
 
