@@ -23,6 +23,9 @@ class ProcessBlur(Process):
         self._array_of_parameter = array_of_parameter
         super(ProcessBlur, self).__init__()
 
+        if (Parameter.lookup(array_of_parameter, "radius") == None):
+            raise ValueError("Must define radius")
+
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessBlur':
         """Returns the dict as a model

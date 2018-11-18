@@ -8,7 +8,6 @@ from typing import List, Dict  # noqa: F401
 from app.models.base_model_ import Model
 from app import util
 
-
 class Parameter(Model):
     def __init__(self, parameter: str=None, value: str=None):  # noqa: E501
         """Parameter - a model defined in Swagger
@@ -93,3 +92,7 @@ class Parameter(Model):
             raise ValueError('Parameter improperly formed. Each Parameter must have property "parameter".')
         if self._value is None:
             raise ValueError('Parameter improperly formed. Each Parameter must have property "value".')
+
+    @staticmethod
+    def lookup(parameters, key):
+        return next(filter(lambda x: x.parameter == key, parameters), None)
