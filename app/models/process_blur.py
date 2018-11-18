@@ -25,6 +25,10 @@ class ProcessBlur(Process):
 
         if (Parameter.lookup(array_of_parameter, "radius") == None):
             raise ValueError("Process Blur must define radius in it's array_of_Parameter")
+        try:
+            self.radius = float(Parameter.lookup(array_of_parameter, "radius").get("value"))
+        except Exception:
+            raise ValueError("Parameter \"radius\" must have a string \"value\" that can be converted to float.")
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessBlur':
