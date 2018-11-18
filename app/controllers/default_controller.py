@@ -126,5 +126,5 @@ typeTable = {
 
 def lookupType(operationName):
     if not operationName in typeTable:
-        raise ValueError(operationName + " is not a valid type")
+        raise ValueError(operationName + " is not a valid operation name")
     return typeTable[operationName]
