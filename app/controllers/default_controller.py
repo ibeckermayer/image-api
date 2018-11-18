@@ -124,7 +124,7 @@ typeTable = {
  "Reformat": ProcessReformat   
 }
 
-def lookupType(operationName):
-    if not operationName in typeTable:
-        raise ValueError(operationName + " is not a valid operation name")
-    return typeTable[operationName]
+def lookupType(processName):
+    if not processName in typeTable:
+        raise ValueError(processName + " is not a valid process name")
+    return typeTable[processName]
