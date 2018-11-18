@@ -25,8 +25,19 @@ class Process(Model):
             'array_of_parameter': 'array_of_Parameter'
         }
 
+        self.validate()
+
+    def validate(self):
+        requirements = self.getRequirements()
+        for name, predicate in requirements.items():
+            if not predicate(Parameter.lookup(self._array_of_parameter, name)):
+                raise ValueError(self.name + " invalid property [" + name + "]")
+
+    def getRequirements(self):
+        pass #abstract
+
     def apply(self, image: Image) -> Image:
-        pass
+        pass #abstract
             
     @property
     def array_of_parameter(self) -> List[Parameter]:

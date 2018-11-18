@@ -9,6 +9,7 @@ from app.models.base_model_ import Model
 from app.models.parameter import Parameter  # noqa: F401,E501
 from app.models.process import Process  # noqa: F401,E501
 from app import util
+import numbers
 
 class ProcessRotate(Process):
     def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
@@ -21,6 +22,11 @@ class ProcessRotate(Process):
 
         self._array_of_parameter = array_of_parameter
         super(ProcessRotate, self).__init__()
+
+    def getRequirements(self):
+        return {
+            "degrees": lambda deg: deg != None and isinstance(deg, numbers.Number)
+        }
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessRotate':

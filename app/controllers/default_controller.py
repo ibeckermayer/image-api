@@ -60,6 +60,7 @@ def image_process():
         return str(e), 400
 
     try:
+        pass
         # TODO:
         # Go through each Process, check that it has a name, if not throw error.
 
@@ -76,7 +77,6 @@ def image_process():
         # If all of those pass, call the appropriate operation function in a list. If you get all the way through
         # and don't get any errors, return that list. Now that you have that list, throw it through the process
         # function with the image, and return that image.
-        
     except Exception as e:
         return str(e), 400
 
