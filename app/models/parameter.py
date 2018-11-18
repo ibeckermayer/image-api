@@ -95,4 +95,4 @@ class Parameter(Model):
 
     @staticmethod
     def lookup(parameters, key):
-        return next(filter(lambda x: x.parameter == key, parameters), None)
+        return next(filter(lambda x: x.get("parameter") == key, parameters), None)

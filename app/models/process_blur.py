@@ -24,7 +24,7 @@ class ProcessBlur(Process):
         super(ProcessBlur, self).__init__()
 
         if (Parameter.lookup(array_of_parameter, "radius") == None):
-            raise ValueError("Must define radius")
+            raise ValueError("Process Blur must define radius in it's array_of_Parameter")
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessBlur':
