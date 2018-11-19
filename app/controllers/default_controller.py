@@ -53,7 +53,7 @@ def image_process():
             return 'Invalid JSON: JSON must have property "array_of_Process"'
 
         processes = [dict_to_process(x) for x in processes_dict["array_of_Process"]]
-        print(processes)
+        # print(processes)
     except Exception as e:
         return str(e), 400
 
@@ -76,8 +76,8 @@ def image_process():
         # function with the image, and return that image.
         # return processes.run(image)
         for process in processes:
-            if process.name == "ProcessRotate":
-                process.verify()
+            if process.name == "Rotate":
+                process.operation()
     except Exception as e:
         return str(e), 400
 

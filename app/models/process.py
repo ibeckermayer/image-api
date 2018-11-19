@@ -31,32 +31,38 @@ class Process(Model):
             'array_of_parameter': 'array_of_Parameter'
         }
 
-    @property
+    # @property TODO: make this a property
     def operation(self):
         """verifies the process is properly formed, then fills out the operation with it's parameters"""
         self._verify_parameters()
-        return self._operation
+        # return self._operation
+        return None
 
     def _verify_parameters(self):
         if self._requires_params:
             self._has_array_of_param_check()
             self._len_array_of_param_check()
-            self._param_name_check()
-            self._param_val_check()
-        raise NotImplementedError()  # virtual method
+            # self._param_name_check()
+            # self._param_val_check()
 
     def _has_array_of_param_check(self):
         """optionally called by _verify() if Process requires array_of_Parameter"""
         if self._array_of_parameter == None:
             raise ValueError("Process [" + self.name + "] must have property array_of_Parameter")
+        else:
+            print("array_of_param passed")
 
     def _len_array_of_param_check(self, minimum: int, maximum: int):
-        if not(len(self._array_of_parameter) >= minimum and len(self._array_of_parameter) <= maximum):
+        if not(len(self._array_of_parameter) >= self._minimum_params and
+               len(self._array_of_parameter) <= self._maximum_params):
             raise ValueError("Process [" + self.name + "] must have property array_of_Parameter between length {0} and {1}".format(minimum, maximum))
+        else:
+            print("len_array_of_param passed")
 
-    def _param_name_check(self, valid_names: List[str]):
-        for param_name in [param.parameter for param in self._array_of_parameter]:
-            if param_name not in valid_names
+
+    # def _param_name_check(self, valid_names: List[str]):
+    #     for param_name in [param.parameter for param in self._array_of_parameter]:
+    #         if param_name not in valid_names
 
 
 

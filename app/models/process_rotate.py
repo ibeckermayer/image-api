@@ -18,6 +18,10 @@ class ProcessRotate(Process):
         :param array_of_parameter: The array_of_parameter of this ProcessRotate.  # noqa: E501
         :type array_of_parameter: List[Parameter]
         """
+        self._requires_params = True
+        self._minimum_params = 1
+        self._maximum_params = 1
+
 
         self._array_of_parameter = array_of_parameter
         super(ProcessRotate, self).__init__()
@@ -33,7 +37,7 @@ class ProcessRotate(Process):
         """
         return util.deserialize_model(dikt, cls)
 
-    def verify(self):
-        self._has_array_of_param_check()
-        self._len_array_of_param_check(1, 1)
+    # def verify(self):
+    #     self._has_array_of_param_check()
+    #     self._len_array_of_param_check(1, 1)
 
