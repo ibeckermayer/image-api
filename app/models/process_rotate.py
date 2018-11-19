@@ -32,3 +32,8 @@ class ProcessRotate(Process):
         :rtype: ProcessRotate
         """
         return util.deserialize_model(dikt, cls)
+
+    def verify(self):
+        self._has_array_of_param_check()
+        self._len_array_of_param_check(1, 1)
+

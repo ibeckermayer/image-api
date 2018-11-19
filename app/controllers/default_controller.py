@@ -48,7 +48,7 @@ def image_process():
         return "Invalid JSON format for Processes", 400
 
     # convert to Processes object
-    try:            
+    try:
         if not "array_of_Process" in processes_dict:
             return 'Invalid JSON: JSON must have property "array_of_Process"'
 
@@ -74,22 +74,25 @@ def image_process():
         # If all of those pass, call the appropriate operation function in a list. If you get all the way through
         # and don't get any errors, return that list. Now that you have that list, throw it through the process
         # function with the image, and return that image.
-        return processes.run(image)
-        processes = None
+        # return processes.run(image)
+        for process in processes:
+            if process.name == "ProcessRotate":
+                process.verify()
     except Exception as e:
         return str(e), 400
 
-    return process(processes, image)
+    # return pipeline([proc.get_operation() for proc in processes], image)
+    return pipeline(processes, image)
 
-def process(processes, image: Image):
+def pipeline(processes, image: Image):
     return "WIP", 200
 
-def dict_to_process(obj) -> Process:
-    if not "name" in obj:
+def dict_to_process(dikt) -> Process:
+    if not "name" in dikt:
         raise ValueError("Process is missing the required field 'name'")
 
-    klass = lookupType(obj["name"])
-    return klass(obj["array_of_Parameter"])
+    klass = lookupType(dikt["name"])
+    return klass(dikt.get("array_of_Parameter"))
 
 def json_to_dict(processes: FileStorage):
     try:

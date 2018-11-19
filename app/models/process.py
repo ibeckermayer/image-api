@@ -13,7 +13,13 @@ from PIL import Image
 
 class Process(Model):
     def __init__(self):
-        self.name = self.__class__.__name__
+        self.name = self.__class__.__name__[7:]
+        self._requires_params = None  # boolean denoting whether this process needs params
+        self._minimum_params = None  # minimum number of parameters taken by this process
+        self._maximum_params = None  # maximum number of parameters taken by this process
+        self._valid_params = None  # list of valid parameter names
+        self._param_type = None    # type that string param must get converted into
+        self._operation = None     # Operation (TODO: define operation class and subclasses) that process preforms
 
         self.swagger_types = {
             'name': str,
@@ -25,9 +31,35 @@ class Process(Model):
             'array_of_parameter': 'array_of_Parameter'
         }
 
-    def apply(self, image: Image) -> Image:
-        pass
-            
+    @property
+    def operation(self):
+        """verifies the process is properly formed, then fills out the operation with it's parameters"""
+        self._verify_parameters()
+        return self._operation
+
+    def _verify_parameters(self):
+        if self._requires_params:
+            self._has_array_of_param_check()
+            self._len_array_of_param_check()
+            self._param_name_check()
+            self._param_val_check()
+        raise NotImplementedError()  # virtual method
+
+    def _has_array_of_param_check(self):
+        """optionally called by _verify() if Process requires array_of_Parameter"""
+        if self._array_of_parameter == None:
+            raise ValueError("Process [" + self.name + "] must have property array_of_Parameter")
+
+    def _len_array_of_param_check(self, minimum: int, maximum: int):
+        if not(len(self._array_of_parameter) >= minimum and len(self._array_of_parameter) <= maximum):
+            raise ValueError("Process [" + self.name + "] must have property array_of_Parameter between length {0} and {1}".format(minimum, maximum))
+
+    def _param_name_check(self, valid_names: List[str]):
+        for param_name in [param.parameter for param in self._array_of_parameter]:
+            if param_name not in valid_names
+
+
+
     @property
     def array_of_parameter(self) -> List[Parameter]:
         """Gets the array_of_parameter of this ProcessBlur.
