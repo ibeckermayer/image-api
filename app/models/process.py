@@ -46,7 +46,7 @@ class Process(Model):
             self._has_array_of_param_check()
             self._len_array_of_param_check()
             self._param_name_check()
-            # self._param_val_check()
+            self._param_val_check()
 
     def _has_array_of_param_check(self):
         """optionally called by _verify() if Process requires array_of_Parameter"""
@@ -68,7 +68,7 @@ class Process(Model):
         for param in self._array_of_parameter:
             param_name = param.get("parameter")
             if param_name == None:
-                raise ValueError("Process [" + self.name + "] has invalidly formatted Parameter. Each Parameter must have property \"parameter\" denoting it's name")
+                raise ValueError("Process [" + self.name + "] has invalid Parameter. Each Parameter must have property \"parameter\" denoting it's name")
             param_names.append(param.get("parameter"))
 
         tups_passed = 0
@@ -80,11 +80,20 @@ class Process(Model):
         if tups_passed != len(self._valid_params):
             raise ValueError("Process [" + self.name + "] must have at least one param in each tuple of {}".format(self._valid_params))
 
-    # def _param_name_check(self, valid_names: List[str]):
-    #     for param_name in [param.parameter for param in self._array_of_parameter]:
-    #         if param_name not in valid_names
+    def _param_val_check(self):
+        """checks that the process has valid value(s) for it's param(s)"""
+        param_vals = []
+        for param in self._array_of_parameter:
+            param_val = param.get("value")
+            if param_val == None:
+                raise ValueError("Process [" + self.name + "] has invalid Parameter. Each Parameter must have property \"value\" denoting it's value")
+            param_vals.append(param_val)
 
-
+        for param_val in param_vals:
+            try:
+                self._param_type(param_val)
+            except Exception:
+                raise TypeError("Process [" + self.name + "] has invalid Parameter. Each Parameter of this Process must have a string that can be converted into type {}".format(self._param_type))
 
     @property
     def array_of_parameter(self) -> List[Parameter]:
