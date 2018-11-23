@@ -57,7 +57,6 @@ def image_process():
         if not "array_of_Process" in processes_dict:
             return 'Invalid JSON: JSON must have property "array_of_Process"'
         processes = [dict_to_process(x) for x in processes_dict["array_of_Process"]]
-        # print(processes)
     except Exception as e:
         return str(e), 400
 
