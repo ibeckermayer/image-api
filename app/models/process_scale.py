@@ -9,7 +9,7 @@ from app.models.base_model_ import Model
 from app.models.parameter import Parameter  # noqa: F401,E501
 from app.models.process import Process  # noqa: F401,E501
 from app import util
-
+from app.operations import *
 
 class ProcessScale(Process):
     def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
@@ -22,6 +22,13 @@ class ProcessScale(Process):
 
         self._array_of_parameter = array_of_parameter
         super(ProcessScale, self).__init__()
+        super(ProcessScale, self).__init__(requires_params=True,
+                                            minimum_params=1,
+                                            maximum_params=2,
+                                            valid_params=[("xsize", "ysize")],
+                                            param_type=int,
+                                            operation=scale)
+
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessScale':
@@ -33,3 +40,21 @@ class ProcessScale(Process):
         :rtype: ProcessScale
         """
         return util.deserialize_model(dikt, cls)
+
+    def _make_operation(self):
+        """fill out the operation with it's parameters"""
+        for param in self._array_of_parameter:
+            xsize = None
+            ysize = None
+            if param["parameter"] == "xsize":
+                xsize = param["value"]
+            elif param["parameter"] == "ysize":
+                ysize = param["value"]
+        if xsize and ysize:
+            return self._operation(int(xsize), int(ysize))
+        elif xsize:
+            return self._operation(xsize=int(xsize))
+        else:
+            return self._operation(ysize=int(ysize))
+
+
