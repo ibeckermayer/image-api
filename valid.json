@@ -16,8 +16,8 @@
 	    "array_of_Parameter":
 	    [
 		{
-		    "parameter": "xsize",
-		    "value": "30"
+		    "parameter": "ysize",
+		    "value": "300"
 		}
 	    ]
 	},
