@@ -8,6 +8,7 @@ from typing import List, Dict, Tuple  # noqa: F401
 from app.models.base_model_ import Model
 from app.models.parameter import Parameter  # noqa: F401,E501
 from app import util
+import itertools
 
 from PIL import Image
 
@@ -61,20 +62,25 @@ class Process(Model):
     def _len_array_of_param_check(self):
         if not(len(self._array_of_parameter) >= self._minimum_params and
                len(self._array_of_parameter) <= self._maximum_params):
-            raise ValueError("Process [" + self.name + "] must have property array_of_Parameter between length {0} and {1}".format(minimum, maximum))
+            raise ValueError("Process [" + self.name + "] must have property array_of_Parameter between length {0} and {1}".format(self._minimum_params, self._maximum_params))
         else:
             print("len_array_of_param passed")
 
     def _param_name_check(self):
-        """checks that the process has a parameter that matches at least one parameter in each tuple"""
+        """checks that the process has a parameter that matches at least one parameter in each tuple in _valid_params
+        Also ensures that all params are valid for this process"""
         param_names = []
+        all_valid_names = list(itertools.chain.from_iterable(self._valid_params))
         for param in self._array_of_parameter:
             param_name = param.get("parameter")
             if param_name == None:
                 raise ValueError("Process [" + self.name + "] has invalid Parameter. Each Parameter must have property \"parameter\" denoting it's name")
+            if not(param_name in all_valid_names):
+                raise ValueError("Process [" + self.name + "] has invalid parameter {}".format(param_name))
             param_names.append(param.get("parameter"))
 
         tups_passed = 0
+        print(all_valid_names)
         for tup in self._valid_params:
             for name in param_names:
                 if name in tup:
