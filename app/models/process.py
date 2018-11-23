@@ -68,7 +68,7 @@ class Process(Model):
 
     def _param_name_check(self):
         """checks that the process has a parameter that matches at least one parameter in each tuple in _valid_params
-        Also ensures that all params are valid for this process"""
+        Also ensures that all params have valid names"""
         param_names = []
         all_valid_names = list(itertools.chain.from_iterable(self._valid_params))
         for param in self._array_of_parameter:
