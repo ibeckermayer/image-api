@@ -67,11 +67,10 @@ class Process(Model):
             print("len_array_of_param passed")
 
     def _param_name_check(self):
-        """checks that the process has a parameter that matches at least one parameter in each tuple in _valid_params
-        Also ensures that all params have valid names"""
+        """checks that the process has a parameter that matches at least one parameter in each list in _valid_params
+        Also ensures that all params have valid names for this process"""
         all_valid_names = list(itertools.chain.from_iterable(self._valid_params))
         param_names = []
-        print(all_valid_names)
         for param in self._array_of_parameter:
             param_name = param.get("parameter")
             if param_name == None:
@@ -82,8 +81,10 @@ class Process(Model):
                 raise ValueError("Process [" + self.name + "] has duplicate parameter {}".format(param_name))
             param_names.append(param.get("parameter"))
 
+        # checking that there is a param in each list in self._valid_params
+        # useful because ProcessScale needs xsize OR ysize OR both (put both of those in one list),
+        # whereas others like crop need 2 points specified (put each val in its own list)
         tups_passed = 0
-        print(all_valid_names)
         for tup in self._valid_params:
             for name in param_names:
                 if name in tup:
