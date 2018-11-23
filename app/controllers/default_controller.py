@@ -1,9 +1,14 @@
 import io
+from io import BytesIO
 import json
+from functools import reduce
 from app import util
-from flask import Flask, request
+from flask import Flask, request, send_file
 from werkzeug.datastructures import FileStorage
 from PIL import Image
+from tempfile import NamedTemporaryFile
+from shutil import copyfileobj
+from os import remove
 from app.models import Parameter
 from app.models import Process
 from app.models import ProcessBlur
@@ -38,7 +43,7 @@ def image_process():
     print("has fields")
 
     # check for valid image
-    image = loadImage(request.files['Image'])
+    image = Image.open(request.files['Image'])
     if image is None:
         return "Invalid image format for Image", 400
 
@@ -51,41 +56,37 @@ def image_process():
     try:
         if not "array_of_Process" in processes_dict:
             return 'Invalid JSON: JSON must have property "array_of_Process"'
-
         processes = [dict_to_process(x) for x in processes_dict["array_of_Process"]]
         # print(processes)
     except Exception as e:
         return str(e), 400
 
+    operations = []
     try:
-        # TODO:
-        # Go through each Process, check that it has a name, if not throw error.
-
-        # If it has a name, check that it has an array_of_parameter if necessary. If not, throw error.
-
-        # If it has a list_of_parameter, make sure that each parameter in that list is properly formed (no missing fields). If not, throw error.
-
-        # If it has necessary list of parameter and each parameter is properly formed, check that it has the correct parameters based on the
-        # name of the process. If not, throw error.
-
-        # If it has necessary list of parameter and each parameter is properly formed and the parameters are correct based on the name of the
-        # process, check that the value of the parameter is correct based on the name ("parameter" property) of the parameters.
-
-        # If all of those pass, call the appropriate operation function in a list. If you get all the way through
-        # and don't get any errors, return that list. Now that you have that list, throw it through the process
-        # function with the image, and return that image.
-        # return processes.run(image)
         for process in processes:
-            if process.name == "Rotate":
-                process.operation()
+            if process.name == "Rotate":  # TODO: this is tbdeleted
+                operations.append(process.operation())
+                # return pipeline([proc.get_operation() for proc in processes], image)
     except Exception as e:
         return str(e), 400
 
-    # return pipeline([proc.get_operation() for proc in processes], image)
-    return pipeline(processes, image)
+    return pipeline(image, operations), 200
 
-def pipeline(processes, image: Image):
-    return "WIP", 200
+def pipeline(image: Image, operations):
+
+    processed_image = reduce(lambda last, operation: operation(last), operations, image)
+    return serve_pil_image(processed_image)
+
+def serve_pil_image(pil_img):
+    """Convert PIL image into image that can be returned by flask endpoint
+    TODO: need to determine which image format to return based on the input image type"""
+    img_io = BytesIO()
+    pil_img.save(img_io, 'JPEG', quality=70)
+    img_io.seek(0)
+    return send_file(img_io, mimetype='image/jpeg')
+
+# def pipeline(processes, image: Image):
+#     return "WIP", 200
 
 def dict_to_process(dikt) -> Process:
     if not "name" in dikt:

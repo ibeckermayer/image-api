@@ -9,6 +9,7 @@ from app.models.base_model_ import Model
 from app.models.parameter import Parameter  # noqa: F401,E501
 from app.models.process import Process  # noqa: F401,E501
 from app import util
+from app.operations import *
 
 class ProcessRotate(Process):
     def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
@@ -18,17 +19,14 @@ class ProcessRotate(Process):
         :param array_of_parameter: The array_of_parameter of this ProcessRotate.  # noqa: E501
         :type array_of_parameter: List[Parameter]
         """
-        # self._requires_params = True
-        # self._minimum_params = 1
-        # self._maximum_params = 1
-
 
         self._array_of_parameter = array_of_parameter
         super(ProcessRotate, self).__init__(requires_params=True,
                                             minimum_params=1,
                                             maximum_params=1,
                                             valid_params=[("degrees")],
-                                            param_type=float)
+                                            param_type=float,
+                                            operation=rotate)
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessRotate':
@@ -41,7 +39,6 @@ class ProcessRotate(Process):
         """
         return util.deserialize_model(dikt, cls)
 
-    # def verify(self):
-    #     self._has_array_of_param_check()
-    #     self._len_array_of_param_check(1, 1)
-
+    def _make_operation(self):
+        """fill out the operation with it's parameters"""
+        return self._operation(float(self._array_of_parameter[0]["value"]))

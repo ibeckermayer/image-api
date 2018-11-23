@@ -20,8 +20,8 @@ class Process(Model):
         self._minimum_params = minimum_params  # minimum number of parameters taken by this process
         self._maximum_params = maximum_params  # maximum number of parameters taken by this process
         self._valid_params = valid_params  # list of tuples. Each process must have at least one parameter from each tuple to be considered valid
-        self._param_type = param_type    # type that string param must get converted into
-        self._operation = operation     # Operation (TODO: define operation class and subclasses) that process preforms
+        self._param_type = param_type  # type that string param must get converted into
+        self._operation = operation  # Operation (TODO: define operation class and subclasses) that process preforms
 
         self.swagger_types = {
             'name': str,
@@ -37,8 +37,11 @@ class Process(Model):
     def operation(self):
         """verifies the process is properly formed, then fills out the operation with it's parameters"""
         self._verify_parameters()
-        # return self._operation
-        return None
+        return self._make_operation()
+
+    def _make_operation(self):
+        """fill out the operation with it's parameters"""
+        raise NotImplementedError()
 
     def _verify_parameters(self):
         if self._requires_params:
