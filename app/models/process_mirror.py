@@ -9,6 +9,7 @@ from app.models.base_model_ import Model
 from app.models.parameter import Parameter  # noqa: F401,E501
 from app.models.process import Process  # noqa: F401,E501
 from app import util
+from app.operations import *
 
 
 class ProcessMirror(Process):
@@ -21,7 +22,12 @@ class ProcessMirror(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessMirror, self).__init__()
+        super(ProcessMirror, self).__init__(requires_params=False,
+                                            minimum_params=None,
+                                            maximum_params=None,
+                                            valid_params=None,
+                                            param_type=None,
+                                            operation=mirror)
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessMirror':
@@ -33,3 +39,6 @@ class ProcessMirror(Process):
         :rtype: ProcessMirror
         """
         return util.deserialize_model(dikt, cls)
+
+    def _make_operation(self):
+        return self._operation()

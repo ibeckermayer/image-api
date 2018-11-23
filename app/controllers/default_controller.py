@@ -63,7 +63,7 @@ def image_process():
     operations = []
     try:
         for process in processes:
-            if process.name == "Rotate":  # TODO: this is tbdeleted
+            if process.name == "Mirror":  # TODO: this is tbdeleted
                 operations.append(process.operation())
                 # return pipeline([proc.get_operation() for proc in processes], image)
     except Exception as e:
