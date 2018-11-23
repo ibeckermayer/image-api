@@ -69,14 +69,17 @@ class Process(Model):
     def _param_name_check(self):
         """checks that the process has a parameter that matches at least one parameter in each tuple in _valid_params
         Also ensures that all params have valid names"""
-        param_names = []
         all_valid_names = list(itertools.chain.from_iterable(self._valid_params))
+        param_names = []
+        print(all_valid_names)
         for param in self._array_of_parameter:
             param_name = param.get("parameter")
             if param_name == None:
                 raise ValueError("Process [" + self.name + "] has invalid Parameter. Each Parameter must have property \"parameter\" denoting it's name")
             if not(param_name in all_valid_names):
                 raise ValueError("Process [" + self.name + "] has invalid parameter {}".format(param_name))
+            if param_name in param_names:
+                raise ValueError("Process [" + self.name + "] has duplicate parameter {}".format(param_name))
             param_names.append(param.get("parameter"))
 
         tups_passed = 0

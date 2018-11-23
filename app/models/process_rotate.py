@@ -24,7 +24,7 @@ class ProcessRotate(Process):
         super(ProcessRotate, self).__init__(requires_params=True,
                                             minimum_params=1,
                                             maximum_params=1,
-                                            valid_params=[("degrees")],
+                                            valid_params=[["degrees"]],
                                             param_type=float,
                                             operation=rotate)
 
