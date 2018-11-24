@@ -28,7 +28,6 @@ class ProcessMedianFilter(Process):
                                                 param_type=int,
                                                 operation=medianFilter)
 
-
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessMedianFilter':
         """Returns the dict as a model

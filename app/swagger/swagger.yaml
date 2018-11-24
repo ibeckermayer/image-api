@@ -87,19 +87,19 @@ definitions:
           - name: MaxFilter
             array_of_Parameter:
               - parameter: size
-                value: "1.7"
+                value: "3"
           - name: MinFilter
             array_of_Parameter:
               - parameter: size
-                value: "1.7"
+                value: "3"
           - name: ModeFilter
             array_of_Parameter:
               - parameter: size
-                value: "1.7"
+                value: "3"
           - name: MedianFilter
             array_of_Parameter:
               - parameter: size
-                value: "1.7"
+                value: "3"
           - name: Edge
             array_of_Parameter:
           - name: Reformat
@@ -437,8 +437,8 @@ definitions:
                   example: size
                 value:
                  type: string
-                 description: Converted to type float.
-                 example: "1.7"
+                 description: Converted to type int.
+                 example: "3"
 
   Process --> MinFilter:
     description: Create a min filter. Picks the lowest pixel value in a window with the given size.
@@ -465,8 +465,8 @@ definitions:
                   example: size
                 value:
                  type: string
-                 description: Converted to type float.
-                 example: "1.7"
+                 description: Converted to type int.
+                 example: "3"
 
   Process --> ModeFilter:
     description: Create a mode filter. Picks the mode pixel value in a window with the given size.
@@ -493,8 +493,8 @@ definitions:
                   example: size
                 value:
                  type: string
-                 description: Converted to type float.
-                 example: "1.7"
+                 description: Converted to type int.
+                 example: "3"
 
   Process --> MedianFilter:
     description: Create a median filter. Picks the median pixel value in a window with the given size.
@@ -521,8 +521,8 @@ definitions:
                   example: size
                 value:
                  type: string
-                 description: Converted to type float.
-                 example: "1.7"
+                 description: Converted to type int.
+                 example: "3"
 
   Process --> Edge:
     description: Enhance the edges on your image.
