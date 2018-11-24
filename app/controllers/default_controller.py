@@ -40,8 +40,6 @@ def image_process():
     if 'Processes' not in request.files:
         return "No Processes specified", 400
 
-    print("has fields")
-
     # check for valid image
     image = Image.open(request.files['Image'])
     if image is None:
@@ -55,7 +53,7 @@ def image_process():
     # convert to Processes object
     try:
         if not "array_of_Process" in processes_dict:
-            return 'Invalid JSON: JSON must have property "array_of_Process"'
+            return 'Invalid JSON: JSON must have property "array_of_Process"', 400
         processes = [dict_to_process(x) for x in processes_dict["array_of_Process"]]
     except Exception as e:
         return str(e), 400
@@ -63,23 +61,13 @@ def image_process():
     operations = []
     try:
         for process in processes:
-            print(process.name)
-            if process.name == "MaxFilter":  # TODO: this is tbdeleted
-                operations.append(process.operation())
-                # return pipeline([proc.get_operation() for proc in processes], image)
+            operations.append(process.operation())
         return pipeline(image, operations), 200
     except Exception as e:
         return str(e), 400
 
-    # for process in processes:
-    #     if process.name == "Mirror":  # TODO: this is tbdeleted
-    #         operations.append(process.operation())
-
-
-
 
 def pipeline(image: Image, operations):
-
     processed_image = reduce(lambda last, operation: operation(last), operations, image)
     return serve_pil_image(processed_image)
 
@@ -90,9 +78,6 @@ def serve_pil_image(pil_img):
     pil_img.save(img_io, 'JPEG', quality=70)
     img_io.seek(0)
     return send_file(img_io, mimetype='image/jpeg')
-
-# def pipeline(processes, image: Image):
-#     return "WIP", 200
 
 def dict_to_process(dikt) -> Process:
     if not "name" in dikt:
