@@ -102,10 +102,6 @@ definitions:
                 value: "3"
           - name: Edge
             array_of_Parameter:
-          - name: Reformat
-            array_of_Parameter:
-              - parameter: format
-                value: "png"
 
   Process:
     description: Specification of a single process.
@@ -130,7 +126,6 @@ definitions:
         - ModeFilter
         - MedianFilter
         - Edge
-        - Reformat
       array_of_Parameter:
         description: Parameter array to further specify the process, if necessary.
         type: array
@@ -534,34 +529,3 @@ definitions:
             enum: 
             - Edge
             example: Edge
-
-  Process --> Reformat:
-    description: Reformat image.
-    allOf:
-      - $ref: "#/definitions/Process"
-      - type: object
-        required:
-        - "array_of_Parameter"
-        properties:
-          name:
-            enum: 
-            - Reformat
-            example: Reformat
-          array_of_Parameter:
-            description: Specify the format to return
-            items:
-              type: object
-              properties:
-                parameter:
-                  type: string
-                  enum:
-                  - format
-                  description: Format suffix, as string. See Enum for array of supported formats
-                  example: format
-                value:
-                 enum:
-                   - jpg
-                   - png
-                 type: string
-                 description: Converted to type float.
-                 example: jpg

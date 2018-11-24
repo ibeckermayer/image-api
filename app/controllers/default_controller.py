@@ -124,8 +124,7 @@ typeTable = {
  "MinFilter": ProcessMinFilter,
  "ModeFilter": ProcessModeFilter,
  "MedianFilter": ProcessMedianFilter,
- "Edge": ProcessEdge,
- "Reformat": ProcessReformat
+ "Edge": ProcessEdge
 }
 
 def lookupType(processName):
