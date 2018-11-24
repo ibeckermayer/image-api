@@ -9,6 +9,7 @@ from PIL import Image
 from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 from os import remove
+import PIL
 from app.models import Parameter
 from app.models import Process
 from app.models import ProcessBlur
@@ -42,7 +43,11 @@ def image_process():
 
     # check for valid image
     image = Image.open(request.files['Image'])
-    if image is None:
+    if type(image) == PIL.PngImagePlugin.PngImageFile:
+        image_format = "png"
+    elif type(image) == PIL.JpegImagePlugin.JpegImageFile:
+        image_format = "jpg"
+    else:
         return "Invalid image format for Image", 400
 
     # check for valid json
@@ -62,22 +67,26 @@ def image_process():
     try:
         for process in processes:
             operations.append(process.operation())
-        return pipeline(image, operations), 200
+        return pipeline(image, operations, image_format), 200
     except Exception as e:
         return str(e), 400
 
 
-def pipeline(image: Image, operations):
+def pipeline(image: Image, operations, image_format):
     processed_image = reduce(lambda last, operation: operation(last), operations, image)
-    return serve_pil_image(processed_image)
+    return serve_pil_image(processed_image, image_format)
 
-def serve_pil_image(pil_img):
-    """Convert PIL image into image that can be returned by flask endpoint
-    TODO: need to determine which image format to return based on the input image type"""
+def serve_pil_image(pil_img, image_format):
+    """Convert PIL image into image that can be returned by flask endpoint"""
     img_io = BytesIO()
-    pil_img.save(img_io, 'JPEG', quality=70)
-    img_io.seek(0)
-    return send_file(img_io, mimetype='image/jpeg')
+    if image_format == "png":
+        pil_img.save(img_io, 'PNG', quality=70)
+        img_io.seek(0)
+        return send_file(img_io, mimetype='image/png')
+    elif image_format == "jpg":
+        pil_img.save(img_io, 'JPEG', quality=70)
+        img_io.seek(0)
+        return send_file(img_io, mimetype='image/jpeg')
 
 def dict_to_process(dikt) -> Process:
     if not "name" in dikt:

@@ -562,9 +562,6 @@ definitions:
                  enum:
                    - jpg
                    - png
-                   - pdf
-                   - bmp
-                   - gif
                  type: string
                  description: Converted to type float.
                  example: jpg
