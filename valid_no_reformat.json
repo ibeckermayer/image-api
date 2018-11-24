@@ -146,16 +146,6 @@
 	{
 	    "name": "Edge",
 	    "array_of_Parameter": null
-	},
-	{
-	    "name": "Reformat",
-	    "array_of_Parameter":
-	    [
-		{
-		    "parameter": "format",
-		    "value": "png"
-		}
-	    ]
 	}
     ]
 }
