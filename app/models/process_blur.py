@@ -9,7 +9,7 @@ from app.models.base_model_ import Model
 from app.models.parameter import Parameter  # noqa: F401,E501
 from app.models.process import Process  # noqa: F401,E501
 from app import util
-
+from app.operations import *
 
 class ProcessBlur(Process):
     def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
@@ -21,14 +21,12 @@ class ProcessBlur(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessBlur, self).__init__()
-
-        if (Parameter.lookup(array_of_parameter, "radius") == None):
-            raise ValueError("Process Blur must define radius in it's array_of_Parameter")
-        try:
-            self.radius = float(Parameter.lookup(array_of_parameter, "radius").get("value"))
-        except Exception:
-            raise ValueError("Parameter \"radius\" must have a string \"value\" that can be converted to float.")
+        super(ProcessBlur, self).__init__(requires_params=True,
+                                                minimum_params=1,
+                                                maximum_params=1,
+                                                valid_params=[["radius"]],
+                                                param_type=float,
+                                                operation=blur)
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessBlur':
@@ -40,3 +38,7 @@ class ProcessBlur(Process):
         :rtype: ProcessBlur
         """
         return util.deserialize_model(dikt, cls)
+
+    def _make_operation(self):
+        """fill out the operation with it's parameters"""
+        return self._operation(float(self._array_of_parameter[0]["value"]))

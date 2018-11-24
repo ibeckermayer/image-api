@@ -63,13 +63,20 @@ def image_process():
     operations = []
     try:
         for process in processes:
-            if process.name == "Mirror":  # TODO: this is tbdeleted
+            print(process.name)
+            if process.name == "MaxFilter":  # TODO: this is tbdeleted
                 operations.append(process.operation())
                 # return pipeline([proc.get_operation() for proc in processes], image)
+        return pipeline(image, operations), 200
     except Exception as e:
         return str(e), 400
 
-    return pipeline(image, operations), 200
+    # for process in processes:
+    #     if process.name == "Mirror":  # TODO: this is tbdeleted
+    #         operations.append(process.operation())
+
+
+
 
 def pipeline(image: Image, operations):
 
@@ -110,21 +117,21 @@ def loadImage(imageUpload: FileStorage):
     return image
 
 typeTable = {
- "Rotate": ProcessRotate, 
- "Scale": ProcessScale, 
- "Crop": ProcessCrop, 
- "Mirror": ProcessMirror, 
- "Color": ProcessColor, 
- "Brightness": ProcessBrightness, 
- "Contrast": ProcessContrast, 
- "Sharpen": ProcessSharpen, 
- "Blur": ProcessBlur, 
- "maxFilter": ProcessMaxFilter, 
- "minFilter": ProcessMinFilter, 
- "modeFilter": ProcessModeFilter, 
- "medianFilter": ProcessMedianFilter, 
- "Edge": ProcessEdge, 
- "Reformat": ProcessReformat   
+ "Rotate": ProcessRotate,
+ "Scale": ProcessScale,
+ "Crop": ProcessCrop,
+ "Mirror": ProcessMirror,
+ "Color": ProcessColor,
+ "Brightness": ProcessBrightness,
+ "Contrast": ProcessContrast,
+ "Sharpen": ProcessSharpen,
+ "Blur": ProcessBlur,
+ "MaxFilter": ProcessMaxFilter,
+ "MinFilter": ProcessMinFilter,
+ "ModeFilter": ProcessModeFilter,
+ "MedianFilter": ProcessMedianFilter,
+ "Edge": ProcessEdge,
+ "Reformat": ProcessReformat
 }
 
 def lookupType(processName):

@@ -9,7 +9,7 @@ from app.models.base_model_ import Model
 from app.models.parameter import Parameter  # noqa: F401,E501
 from app.models.process import Process  # noqa: F401,E501
 from app import util
-
+from app.operations import *
 
 class ProcessEdge(Process):
     def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
@@ -21,7 +21,13 @@ class ProcessEdge(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessEdge, self).__init__()
+        super(ProcessEdge, self).__init__(requires_params=False,
+                                                minimum_params=None,
+                                                maximum_params=None,
+                                                valid_params=None,
+                                                param_type=None,
+                                                operation=edge)
+
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessEdge':
@@ -33,3 +39,7 @@ class ProcessEdge(Process):
         :rtype: ProcessEdge
         """
         return util.deserialize_model(dikt, cls)
+
+    def _make_operation(self):
+        """fill out the operation with it's parameters"""
+        return self._operation()

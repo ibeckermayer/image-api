@@ -22,11 +22,11 @@ class ProcessMirror(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessMirror, self).__init__(requires_params=False,
-                                            minimum_params=None,
-                                            maximum_params=None,
-                                            valid_params=None,
-                                            param_type=None,
+        super(ProcessMirror, self).__init__(requires_params=True,
+                                            minimum_params=1,
+                                            maximum_params=1,
+                                            valid_params=[["flip"]],
+                                            param_type=str,
                                             operation=mirror)
 
     @classmethod
@@ -41,4 +41,9 @@ class ProcessMirror(Process):
         return util.deserialize_model(dikt, cls)
 
     def _make_operation(self):
-        return self._operation()
+        if self._array_of_parameter[0]["value"] == "horizontal":
+            return self._operation(Flip.Horizontal)
+        elif self._array_of_parameter[0]["value"] == "vertical":
+            return self._operation(Flip.Vertical)
+        else:
+            raise ValueError("In process Mirror, flip parameter must have value 'horizontal' or 'vertical'.")

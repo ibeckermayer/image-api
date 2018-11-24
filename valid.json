@@ -45,7 +45,14 @@
 	},
 	{
 	    "name": "Mirror",
-	    "array_of_Parameter": null
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "flip",
+		    "value": "horizontal"
+		}
+	    ]
+
 	},
 	{
 	    "name": "Color",
@@ -98,42 +105,42 @@
 	    ]
 	},
 	{
-	    "name": "maxFilter",
+	    "name": "MaxFilter",
 	    "array_of_Parameter":
 	    [
 		{
 		    "parameter": "size",
-		    "value": "1.7"
+		    "value": "1"
 		}
 	    ]
 	},
 	{
-	    "name": "minFilter",
+	    "name": "MinFilter",
 	    "array_of_Parameter":
 	    [
 		{
 		    "parameter": "size",
-		    "value": "1.7"
+		    "value": "10"
 		}
 	    ]
 	},
 	{
-	    "name": "modeFilter",
+	    "name": "ModeFilter",
 	    "array_of_Parameter":
 	    [
 		{
 		    "parameter": "size",
-		    "value": "1.7"
+		    "value": "10"
 		}
 	    ]
 	},
 	{
-	    "name": "medianFilter",
+	    "name": "MedianFilter",
 	    "array_of_Parameter":
 	    [
 		{
 		    "parameter": "size",
-		    "value": "1.7"
+		    "value": "10"
 		}
 	    ]
 	},

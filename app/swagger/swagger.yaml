@@ -62,6 +62,8 @@ definitions:
                 value: "60"
           - name: Mirror
             array_of_Parameter:
+              - parameter: flip
+                value: "horizontal"
           - name: Color
             array_of_Parameter:
               - parameter: factor
@@ -82,19 +84,19 @@ definitions:
             array_of_Parameter:
               - parameter: radius
                 value: "1.7"
-          - name: maxFilter
+          - name: MaxFilter
             array_of_Parameter:
               - parameter: size
                 value: "1.7"
-          - name: minFilter
+          - name: MinFilter
             array_of_Parameter:
               - parameter: size
                 value: "1.7"
-          - name: modeFilter
+          - name: ModeFilter
             array_of_Parameter:
               - parameter: size
                 value: "1.7"
-          - name: medianFilter
+          - name: MedianFilter
             array_of_Parameter:
               - parameter: size
                 value: "1.7"
@@ -123,10 +125,10 @@ definitions:
         - Contrast
         - Sharpen
         - Blur
-        - maxFilter
-        - minFilter
-        - modeFilter
-        - medianFilter
+        - MaxFilter
+        - MinFilter
+        - ModeFilter
+        - MedianFilter
         - Edge
         - Reformat
       array_of_Parameter:
@@ -241,7 +243,7 @@ definitions:
                  example: "30"
 
   Process --> Mirror:
-    description: Return a mirror image of the original image. No parameters.
+    description: Return a mirror image of the original image. Choose horizontal or verticle flip.
     allOf:
       - $ref: "#/definitions/Process"
       - type: object
@@ -250,6 +252,25 @@ definitions:
             enum: 
             - Mirror
             example: Mirror
+          array_of_Parameter:
+            description: Specify direction.
+            items:
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  enum:
+                  - flip
+                  description: horizontal or vertical
+                  example: horizontal
+                value:
+                 type: string
+                 description: Converted to string.
+                 enum:
+                 - horizontal
+                 - vertical
+                 example: "horizontal"
+
 
   Process --> Color:
     description: Can be used to adjust the colour balance of an image, in a manner similar to the controls on a colour TV set. An enhancement factor of 0.0 gives a black and white image. A factor of 1.0 gives the original image.
@@ -391,7 +412,7 @@ definitions:
                  description: Converted to type float.
                  example: "1.7"
 
-  Process --> maxFilter:
+  Process --> MaxFilter:
     description: Create a max filter. Picks the largest pixel value in a window with the given size.
     allOf:
       - $ref: "#/definitions/Process"
@@ -401,8 +422,8 @@ definitions:
         properties:
           name:
             enum: 
-            - maxFilter
-            example: maxFilter
+            - MaxFilter
+            example: MaxFilter
           array_of_Parameter:
             description: Specify size of filter window.
             items:
@@ -419,7 +440,7 @@ definitions:
                  description: Converted to type float.
                  example: "1.7"
 
-  Process --> minFilter:
+  Process --> MinFilter:
     description: Create a min filter. Picks the lowest pixel value in a window with the given size.
     allOf:
       - $ref: "#/definitions/Process"
@@ -429,8 +450,8 @@ definitions:
         properties:
           name:
             enum: 
-            - minFilter
-            example: minFilter
+            - MinFilter
+            example: MinFilter
           array_of_Parameter:
             description: Specify size of filter window.
             items:
@@ -447,7 +468,7 @@ definitions:
                  description: Converted to type float.
                  example: "1.7"
 
-  Process --> modeFilter:
+  Process --> ModeFilter:
     description: Create a mode filter. Picks the mode pixel value in a window with the given size.
     allOf:
       - $ref: "#/definitions/Process"
@@ -457,8 +478,8 @@ definitions:
         properties:
           name:
             enum: 
-            - modeFilter
-            example: modeFilter
+            - ModeFilter
+            example: ModeFilter
           array_of_Parameter:
             description: Specify size of filter window.
             items:
@@ -475,7 +496,7 @@ definitions:
                  description: Converted to type float.
                  example: "1.7"
 
-  Process --> medianFilter:
+  Process --> MedianFilter:
     description: Create a median filter. Picks the median pixel value in a window with the given size.
     allOf:
       - $ref: "#/definitions/Process"
@@ -485,8 +506,8 @@ definitions:
         properties:
           name:
             enum: 
-            - medianFilter
-            example: medianFilter
+            - MedianFilter
+            example: MedianFilter
           array_of_Parameter:
             description: Specify size of filter window.
             items:
