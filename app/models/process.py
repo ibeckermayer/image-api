@@ -46,7 +46,6 @@ class Process(Model):
 
     def _verify_parameters(self):
         if self._requires_params:
-            print("reqs")
             self._has_array_of_param_check()
             self._len_array_of_param_check()
             self._param_name_check()
@@ -56,15 +55,11 @@ class Process(Model):
         """optionally called by _verify() if Process requires array_of_Parameter"""
         if self._array_of_parameter == None:
             raise ValueError("Process [" + self.name + "] must have property array_of_Parameter")
-        else:
-            print("array_of_param passed")
 
     def _len_array_of_param_check(self):
         if not(len(self._array_of_parameter) >= self._minimum_params and
                len(self._array_of_parameter) <= self._maximum_params):
             raise ValueError("Process [" + self.name + "] must have property array_of_Parameter between length {0} and {1}".format(self._minimum_params, self._maximum_params))
-        else:
-            print("len_array_of_param passed")
 
     def _param_name_check(self):
         """checks that the process has a parameter that matches at least one parameter in each list in _valid_params
