@@ -42,9 +42,9 @@ class ProcessScale(Process):
 
     def _make_operation(self):
         """fill out the operation with it's parameters"""
+        xsize = None
+        ysize = None
         for param in self._array_of_parameter:
-            xsize = None
-            ysize = None
             if param["parameter"] == "xsize":
                 xsize = param["value"]
             elif param["parameter"] == "ysize":
