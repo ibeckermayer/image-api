@@ -1,0 +1,16 @@
+{
+    "array_of_Process":
+    [
+	{
+	    "name": "MaxFilter",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "size",
+		    "value": "3"
+		}
+	    ]
+	}
+    ]
+}
+

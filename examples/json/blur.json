@@ -1,0 +1,16 @@
+{
+    "array_of_Process":
+    [
+	{
+	    "name": "Blur",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "radius",
+		    "value": "1.7"
+		}
+	    ]
+	}
+    ]
+}
+

@@ -1,0 +1,16 @@
+{
+    "array_of_Process":
+    [
+	{
+	    "name": "Scale",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "xsize",
+		    "value": "300"
+		}
+	    ]
+	}
+    ]
+}
+

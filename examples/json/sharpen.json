@@ -1,0 +1,16 @@
+{
+    "array_of_Process":
+    [
+	{
+	    "name": "Sharpen",
+	    "array_of_Parameter":
+	    [
+		{
+		    "parameter": "factor",
+		    "value": "1.7"
+		}
+	    ]
+	}
+    ]
+}
+
