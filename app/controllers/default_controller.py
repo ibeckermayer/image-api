@@ -9,7 +9,7 @@ from PIL import Image
 from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 from os import remove
-from app.operationLookup import lookupType
+from app.operationLookup import lookup_operation_by_name
 from app.operations import pipeline
 import PIL
 from app.models import Process
@@ -36,8 +36,9 @@ def image_process():
         return "Invalid image format for Image", 400
 
     # check for valid json
-    processes_dict = json_to_dict(request.files['Processes'])
-    if processes_dict is None:
+    try:
+        processes_dict = json.load(request.files['Processes'])
+    except:
         return "Invalid JSON format for Processes", 400
 
     # convert to Processes object
@@ -54,7 +55,7 @@ def image_process():
     except Exception as e:
         return str(e), 400
 
-def serve_pil_image(pil_img, image_format):
+def serve_pil_image(pil_img: Image, image_format: str):
     """Convert PIL image into image that can be returned by flask endpoint"""
     img_io = BytesIO()
     if image_format == "png":
@@ -66,20 +67,14 @@ def serve_pil_image(pil_img, image_format):
         img_io.seek(0)
         return send_file(img_io, mimetype='image/jpeg')
 
-def dict_to_process(dikt) -> Process:
+def dict_to_process(dikt: dict) -> Process:
     if not "name" in dikt:
         raise ValueError("Process is missing the required field 'name'")
 
-    klass = lookupType(dikt["name"])
-    return klass(dikt.get("array_of_Parameter"))
+    operation_class = lookup_operation_by_name(dikt["name"])
+    return operation_class(dikt.get("array_of_Parameter"))
 
-def json_to_dict(processes: FileStorage):
-    try:
-        return json.load(processes)
-    except:
-        return None
-
-def loadImage(imageUpload: FileStorage):
+def loadImage(imageUpload: FileStorage) -> Image:
     try:
         in_memory_file = io.BytesIO()
         imageUpload.save(in_memory_file)

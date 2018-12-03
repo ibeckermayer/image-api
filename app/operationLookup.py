@@ -30,7 +30,7 @@ typeTable = {
  "Edge": ProcessEdge
 }
 
-def lookupType(processName):
-    if not processName in typeTable:
-        raise ValueError(processName + " is not a valid process name")
-    return typeTable[processName]
+def lookup_operation_by_name(operation_name: str):
+    if not operation_name in typeTable:
+        raise ValueError(operation_name + " is not a valid process name")
+    return typeTable[operation_name]
