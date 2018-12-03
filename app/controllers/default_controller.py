@@ -10,6 +10,7 @@ from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 from os import remove
 from app.operationLookup import lookupType
+from app.operations import pipeline
 import PIL
 from app.models import Process
 
@@ -51,14 +52,10 @@ def image_process():
     try:
         for process in processes:
             operations.append(process.operation())
-        return pipeline(image, operations, image_format), 200
+        processedImage = pipeline(image, operations)
+        return serve_pil_image(processedImage, image_format), 200
     except Exception as e:
         return str(e), 400
-
-
-def pipeline(image: Image, operations, image_format):
-    processed_image = reduce(lambda last, operation: operation(last), operations, image)
-    return serve_pil_image(processed_image, image_format)
 
 def serve_pil_image(pil_img, image_format):
     """Convert PIL image into image that can be returned by flask endpoint"""
