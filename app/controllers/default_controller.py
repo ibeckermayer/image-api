@@ -48,11 +48,8 @@ def image_process():
     except Exception as e:
         return str(e), 400
 
-    operations = []
     try:
-        for process in processes:
-            operations.append(process.operation())
-        processedImage = pipeline(image, operations)
+        processedImage = pipeline(image, [process.operation() for process in processes])
         return serve_pil_image(processedImage, image_format), 200
     except Exception as e:
         return str(e), 400
