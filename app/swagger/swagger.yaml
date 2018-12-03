@@ -51,9 +51,10 @@ definitions:
               - BMP
               - EPS
               - ICO
-              - TGA              
+              - TGA
+              - PDF              
           quality:
-            description: "The quality setting to return - only used for jpeg"
+            description: "The quality setting to return - only supported for lossy-compression formats"
             type: number 
       processes:
         type: "array"

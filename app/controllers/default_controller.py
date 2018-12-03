@@ -1,4 +1,3 @@
-import io
 from io import BytesIO
 import json
 from functools import reduce
@@ -10,6 +9,7 @@ from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 from os import remove
 from app.processLoader import load_process_from_dict
+from app.modeConverter import switch_modes_if_needed
 from app.operations import pipeline
 import PIL
 from app.models import Process
@@ -27,7 +27,11 @@ def image_process():
         return "No Processes specified", 400
 
     # check for valid image
-    uploadedImage = Image.open(request.files['Image'])
+    try:
+        uploadedImage = Image.open(request.files['Image'])
+    except:
+        return "Could not load uploaded image", 400
+
     uploadedFormat = uploadedImage.__class__.__name__.replace("ImageFile", "").upper()
 
     # check for valid json
@@ -60,14 +64,15 @@ def serve_pil_image(pil_img: Image, image_format: dict, uploadedFormat: str):
         desiredQuality = (image_format.get("quality") or desiredQuality)
         desiredFormat = image_format["type"].upper()
 
-    pil_img.save(img_io, desiredFormat, quality=desiredQuality)
+    convertedImage = switch_modes_if_needed(pil_img, desiredFormat)
+    convertedImage.save(img_io, desiredFormat, quality=desiredQuality)
     img_io.seek(0)
     return send_file(img_io, mimetype=desiredMime)
 
 def load_pil_image(imageUpload: FileStorage) -> Image:
     """Load an uploaded file into a processable PIL image"""
     try:
-        in_memory_file = io.BytesIO()
+        in_memory_file = BytesIO()
         imageUpload.save(in_memory_file)
         return Image.open(in_memory_file)
     except:
