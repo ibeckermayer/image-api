@@ -1,9 +1,9 @@
 {
-    "array_of_Process":
+    "processes":
     [
 	{
 	    "name": "Crop",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "top_left_x",

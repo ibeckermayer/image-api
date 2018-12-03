@@ -12,15 +12,15 @@ from app import util
 from app.operations import *
 
 class ProcessEdge(Process):
-    def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
+    def __init__(self, parameters: List[Parameter]=None):  # noqa: E501
         """ProcessEdge - a model defined in Swagger
 
         :param name: The name of this ProcessEdge.  # noqa: E501
-        :param array_of_parameter: The array_of_parameter of this ProcessEdge.  # noqa: E501
-        :type array_of_parameter: List[Parameter]
+        :param parameters: The parameters of this ProcessEdge.  # noqa: E501
+        :type parameters: List[Parameter]
         """
 
-        self._array_of_parameter = array_of_parameter
+        self._parameters = parameters
         super(ProcessEdge, self).__init__(requires_params=False,
                                                 minimum_params=None,
                                                 maximum_params=None,

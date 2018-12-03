@@ -12,15 +12,15 @@ from app import util
 from app.operations import *
 
 class ProcessScale(Process):
-    def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
+    def __init__(self, parameters: List[Parameter]=None):  # noqa: E501
         """ProcessScale - a model defined in Swagger
 
         :param name: The name of this ProcessScale.  # noqa: E501
-        :param array_of_parameter: The array_of_parameter of this ProcessScale.  # noqa: E501
-        :type array_of_parameter: List[Parameter]
+        :param parameters: The parameters of this ProcessScale.  # noqa: E501
+        :type parameters: List[Parameter]
         """
 
-        self._array_of_parameter = array_of_parameter
+        self._parameters = parameters
         super(ProcessScale, self).__init__(requires_params=True,
                                             minimum_params=1,
                                             maximum_params=2,
@@ -44,7 +44,7 @@ class ProcessScale(Process):
         """fill out the operation with it's parameters"""
         xsize = None
         ysize = None
-        for param in self._array_of_parameter:
+        for param in self._parameters:
             if param["parameter"] == "xsize":
                 xsize = param["value"]
             elif param["parameter"] == "ysize":

@@ -26,12 +26,12 @@ class Process(Model):
 
         self.swagger_types = {
             'name': str,
-            'array_of_parameter': List[Parameter]
+            'parameters': List[Parameter]
         }
 
         self.attribute_map = {
             'name': 'name',
-            'array_of_parameter': 'array_of_Parameter'
+            'parameters': 'parameters'
         }
 
     # @property TODO: make this a property
@@ -52,21 +52,21 @@ class Process(Model):
             self._param_val_check()
 
     def _has_array_of_param_check(self):
-        """optionally called by _verify() if Process requires array_of_Parameter"""
-        if self._array_of_parameter == None:
-            raise ValueError("Process [" + self.name + "] must have property array_of_Parameter")
+        """optionally called by _verify() if Process requires parameters"""
+        if self._parameters == None:
+            raise ValueError("Process [" + self.name + "] must have property parameters")
 
     def _len_array_of_param_check(self):
-        if not(len(self._array_of_parameter) >= self._minimum_params and
-               len(self._array_of_parameter) <= self._maximum_params):
-            raise ValueError("Process [" + self.name + "] must have property array_of_Parameter between length {0} and {1}".format(self._minimum_params, self._maximum_params))
+        if not(len(self._parameters) >= self._minimum_params and
+               len(self._parameters) <= self._maximum_params):
+            raise ValueError("Process [" + self.name + "] must have property parameters between length {0} and {1}".format(self._minimum_params, self._maximum_params))
 
     def _param_name_check(self):
         """checks that the process has a parameter that matches at least one parameter in each list in _valid_params
         Also ensures that all params have valid names for this process"""
         all_valid_names = list(itertools.chain.from_iterable(self._valid_params))
         param_names = []
-        for param in self._array_of_parameter:
+        for param in self._parameters:
             param_name = param.get("parameter")
             if param_name == None:
                 raise ValueError("Process [" + self.name + "] has invalid Parameter. Each Parameter must have property \"parameter\" denoting it's name")
@@ -91,7 +91,7 @@ class Process(Model):
     def _param_val_check(self):
         """checks that the process has valid value(s) for it's param(s)"""
         param_vals = []
-        for param in self._array_of_parameter:
+        for param in self._parameters:
             param_val = param.get("value")
             if param_val == None:
                 raise ValueError("Process [" + self.name + "] has invalid Parameter. Each Parameter must have property \"value\" denoting it's value")
@@ -104,24 +104,24 @@ class Process(Model):
                 raise TypeError("Process [" + self.name + "] has invalid Parameter. Each Parameter of this Process must have a string that can be converted into type {}".format(self._param_type))
 
     @property
-    def array_of_parameter(self) -> List[Parameter]:
-        """Gets the array_of_parameter of this ProcessBlur.
+    def parameters(self) -> List[Parameter]:
+        """Gets the parameters of this ProcessBlur.
 
         Parameter array to further specify the process, if necessary.  # noqa: E501
 
-        :return: The array_of_parameter of this ProcessBlur.
+        :return: The parameters of this ProcessBlur.
         :rtype: List[Parameter]
         """
-        return self._array_of_parameter
+        return self._parameters
 
-    @array_of_parameter.setter
-    def array_of_parameter(self, array_of_parameter: List[Parameter]):
-        """Sets the array_of_parameter of this ProcessBlur.
+    @parameters.setter
+    def parameters(self, parameters: List[Parameter]):
+        """Sets the parameters of this ProcessBlur.
 
         Parameter array to further specify the process, if necessary.  # noqa: E501
 
-        :param array_of_parameter: The array_of_parameter of this ProcessBlur.
-        :type array_of_parameter: List[Parameter]
+        :param parameters: The parameters of this ProcessBlur.
+        :type parameters: List[Parameter]
         """
 
-        self._array_of_parameter = array_of_parameter
+        self._parameters = parameters

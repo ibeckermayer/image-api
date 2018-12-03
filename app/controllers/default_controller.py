@@ -43,9 +43,9 @@ def image_process():
 
     # convert to Processes object
     try:
-        if not "array_of_Process" in processes_dict:
-            return 'Invalid JSON: JSON must have property "array_of_Process"', 400
-        processes = [load_process_from_dict(x).operation() for x in processes_dict["array_of_Process"]]
+        if not "processes" in processes_dict:
+            return 'Invalid JSON: JSON must have property "processes"', 400
+        processes = [load_process_from_dict(x).operation() for x in processes_dict["processes"]]
     except Exception as e:
         return str(e), 400
 

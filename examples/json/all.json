@@ -1,9 +1,9 @@
 {
-    "array_of_Process":
+    "processes":
     [
 	{
 	    "name": "Rotate",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "degrees",
@@ -13,7 +13,7 @@
 	},
 	{
 	    "name": "Scale",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "ysize",
@@ -23,7 +23,7 @@
 	},
 	{
 	    "name": "Crop",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "top_left_x",
@@ -45,7 +45,7 @@
 	},
 	{
 	    "name": "Mirror",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "flip",
@@ -55,7 +55,7 @@
 	},
 	{
 	    "name": "Color",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "factor",
@@ -65,7 +65,7 @@
 	},
 	{
 	    "name": "Brightness",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "factor",
@@ -75,7 +75,7 @@
 	},
 	{
 	    "name": "Contrast",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "factor",
@@ -85,7 +85,7 @@
 	},
 	{
 	    "name": "Sharpen",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "factor",
@@ -95,7 +95,7 @@
 	},
 	{
 	    "name": "Blur",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "radius",
@@ -105,7 +105,7 @@
 	},
 	{
 	    "name": "MaxFilter",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "size",
@@ -115,7 +115,7 @@
 	},
 	{
 	    "name": "MinFilter",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "size",
@@ -125,7 +125,7 @@
 	},
 	{
 	    "name": "ModeFilter",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "size",
@@ -135,7 +135,7 @@
 	},
 	{
 	    "name": "MedianFilter",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "size",
@@ -145,7 +145,7 @@
 	},
 	{
 	    "name": "Edge",
-	    "array_of_Parameter": null
+	    "parameters": null
 	}
     ]
 }

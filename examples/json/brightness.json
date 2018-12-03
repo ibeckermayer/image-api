@@ -1,9 +1,9 @@
 {
-    "array_of_Process":
+    "processes":
     [
 	{
 	    "name": "Brightness",
-	    "array_of_Parameter":
+	    "parameters":
 	    [
 		{
 		    "parameter": "factor",

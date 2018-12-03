@@ -13,15 +13,15 @@ from app.operations import *
 
 
 class ProcessMirror(Process):
-    def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
+    def __init__(self, parameters: List[Parameter]=None):  # noqa: E501
         """ProcessMirror - a model defined in Swagger
 
         :param name: The name of this ProcessMirror.  # noqa: E501
-        :param array_of_parameter: The array_of_parameter of this ProcessMirror.  # noqa: E501
-        :type array_of_parameter: List[Parameter]
+        :param parameters: The parameters of this ProcessMirror.  # noqa: E501
+        :type parameters: List[Parameter]
         """
 
-        self._array_of_parameter = array_of_parameter
+        self._parameters = parameters
         super(ProcessMirror, self).__init__(requires_params=True,
                                             minimum_params=1,
                                             maximum_params=1,
@@ -41,9 +41,9 @@ class ProcessMirror(Process):
         return util.deserialize_model(dikt, cls)
 
     def _make_operation(self):
-        if self._array_of_parameter[0]["value"] == "horizontal":
+        if self._parameters[0]["value"] == "horizontal":
             return self._operation(Flip.Horizontal)
-        elif self._array_of_parameter[0]["value"] == "vertical":
+        elif self._parameters[0]["value"] == "vertical":
             return self._operation(Flip.Vertical)
         else:
             raise ValueError("In process Mirror, flip parameter must have value 'horizontal' or 'vertical'.")
