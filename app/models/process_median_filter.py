@@ -12,15 +12,15 @@ from app import util
 from app.operations import *
 
 class ProcessMedianFilter(Process):
-    def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
+    def __init__(self, parameters: List[Parameter]=None):  # noqa: E501
         """ProcessMedianFilter - a model defined in Swagger
 
         :param name: The name of this ProcessMedianFilter.  # noqa: E501
-        :param array_of_parameter: The array_of_parameter of this ProcessMedianFilter.  # noqa: E501
-        :type array_of_parameter: List[Parameter]
+        :param parameters: The parameters of this ProcessMedianFilter.  # noqa: E501
+        :type parameters: List[Parameter]
         """
 
-        self._array_of_parameter = array_of_parameter
+        self._parameters = parameters
         super(ProcessMedianFilter, self).__init__(valid_params=[["size"]],
                                                   param_type=int,
                                                   operation=medianFilter)
@@ -38,4 +38,4 @@ class ProcessMedianFilter(Process):
 
     def _make_operation(self):
         """fill out the operation with it's parameters"""
-        return self._operation(int(self._array_of_parameter[0]["value"]))
+        return self._operation(int(self._parameters[0]["value"]))

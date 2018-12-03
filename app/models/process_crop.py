@@ -12,15 +12,15 @@ from app import util
 from app.operations import *
 
 class ProcessCrop(Process):
-    def __init__(self, array_of_parameter: List[Parameter]=None):  # noqa: E501
+    def __init__(self, parameters: List[Parameter]=None):  # noqa: E501
         """ProcessCrop - a model defined in Swagger
 
         :param name: The name of this ProcessCrop.  # noqa: E501
-        :param array_of_parameter: The array_of_parameter of this ProcessCrop.  # noqa: E501
-        :type array_of_parameter: List[Parameter]
+        :param parameters: The parameters of this ProcessCrop.  # noqa: E501
+        :type parameters: List[Parameter]
         """
 
-        self._array_of_parameter = array_of_parameter
+        self._parameters = parameters
         super(ProcessCrop, self).__init__(valid_params=[["top_left_x"],
                                                         ["top_left_y"],
                                                         ["bottom_right_x"],
@@ -41,7 +41,7 @@ class ProcessCrop(Process):
 
     def _make_operation(self):
         """fill out the operation with it's parameters"""
-        for param in self._array_of_parameter:
+        for param in self._parameters:
             if param["parameter"] == "top_left_x":
                 top_left_x = int(param["value"])
             elif param["parameter"] == "top_left_y":
