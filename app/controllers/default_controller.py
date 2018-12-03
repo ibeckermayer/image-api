@@ -68,10 +68,10 @@ def serve_pil_image(pil_img: Image, image_format: str):
         return send_file(img_io, mimetype='image/jpeg')
 
 def load_pil_image(imageUpload: FileStorage) -> Image:
+    """Load an uploaded file into a processable PIL image"""
     try:
         in_memory_file = io.BytesIO()
         imageUpload.save(in_memory_file)
-        image = Image.open(in_memory_file)
+        return Image.open(in_memory_file)
     except:
-        image = None
-    return image
+        return None
