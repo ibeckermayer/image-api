@@ -67,7 +67,7 @@ def serve_pil_image(pil_img: Image, image_format: str):
         img_io.seek(0)
         return send_file(img_io, mimetype='image/jpeg')
 
-def loadImage(imageUpload: FileStorage) -> Image:
+def load_pil_image(imageUpload: FileStorage) -> Image:
     try:
         in_memory_file = io.BytesIO()
         imageUpload.save(in_memory_file)
