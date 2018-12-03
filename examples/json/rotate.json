@@ -1,15 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "Rotate",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "degrees",
-		    "value": "30"
+			"name": "Rotate",
+			"parameters": [
+				{
+					"parameter": "degrees",
+					"value": "30"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }

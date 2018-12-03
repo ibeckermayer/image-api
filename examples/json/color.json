@@ -1,16 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "Color",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "factor",
-		    "value": "3.7"
+			"name": "Color",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "3.7"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

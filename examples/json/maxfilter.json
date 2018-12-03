@@ -1,16 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "MaxFilter",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "size",
-		    "value": "3"
+			"name": "MaxFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

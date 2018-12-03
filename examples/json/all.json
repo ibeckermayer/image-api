@@ -1,151 +1,137 @@
 {
-    "processes":
-    [
-	{
-	    "name": "Rotate",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "degrees",
-		    "value": "30"
-		}
-	    ]
-	},
-	{
-	    "name": "Scale",
-	    "parameters":
-	    [
-		{
-		    "parameter": "ysize",
-		    "value": "300"
-		}
-	    ]
-	},
-	{
-	    "name": "Crop",
-	    "parameters":
-	    [
-		{
-		    "parameter": "top_left_x",
-		    "value": "30"
+			"name": "Rotate",
+			"parameters": [
+				{
+					"parameter": "degrees",
+					"value": "30"
+				}
+			]
 		},
 		{
-		    "parameter": "top_left_y",
-		    "value": "30"
+			"name": "Scale",
+			"parameters": [
+				{
+					"parameter": "ysize",
+					"value": "300"
+				}
+			]
 		},
 		{
-		    "parameter": "bottom_right_x",
-		    "value": "60"
+			"name": "Crop",
+			"parameters": [
+				{
+					"parameter": "top_left_x",
+					"value": "30"
+				},
+				{
+					"parameter": "top_left_y",
+					"value": "30"
+				},
+				{
+					"parameter": "bottom_right_x",
+					"value": "60"
+				},
+				{
+					"parameter": "bottom_right_y",
+					"value": "60"
+				}
+			]
 		},
 		{
-		    "parameter": "bottom_right_y",
-		    "value": "60"
-		}
-	    ]
-	},
-	{
-	    "name": "Mirror",
-	    "parameters":
-	    [
+			"name": "Mirror",
+			"parameters": [
+				{
+					"parameter": "flip",
+					"value": "horizontal"
+				}
+			]
+		},
 		{
-		    "parameter": "flip",
-		    "value": "horizontal"
-		}
-	    ]
-	},
-	{
-	    "name": "Color",
-	    "parameters":
-	    [
+			"name": "Color",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "1.7"
+				}
+			]
+		},
 		{
-		    "parameter": "factor",
-		    "value": "1.7"
-		}
-	    ]
-	},
-	{
-	    "name": "Brightness",
-	    "parameters":
-	    [
+			"name": "Brightness",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "1.7"
+				}
+			]
+		},
 		{
-		    "parameter": "factor",
-		    "value": "1.7"
-		}
-	    ]
-	},
-	{
-	    "name": "Contrast",
-	    "parameters":
-	    [
+			"name": "Contrast",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "1.7"
+				}
+			]
+		},
 		{
-		    "parameter": "factor",
-		    "value": "1.7"
-		}
-	    ]
-	},
-	{
-	    "name": "Sharpen",
-	    "parameters":
-	    [
+			"name": "Sharpen",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "1.7"
+				}
+			]
+		},
 		{
-		    "parameter": "factor",
-		    "value": "1.7"
-		}
-	    ]
-	},
-	{
-	    "name": "Blur",
-	    "parameters":
-	    [
+			"name": "Blur",
+			"parameters": [
+				{
+					"parameter": "radius",
+					"value": "1.7"
+				}
+			]
+		},
 		{
-		    "parameter": "radius",
-		    "value": "1.7"
-		}
-	    ]
-	},
-	{
-	    "name": "MaxFilter",
-	    "parameters":
-	    [
+			"name": "MaxFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
+		},
 		{
-		    "parameter": "size",
-		    "value": "3"
-		}
-	    ]
-	},
-	{
-	    "name": "MinFilter",
-	    "parameters":
-	    [
+			"name": "MinFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
+		},
 		{
-		    "parameter": "size",
-		    "value": "3"
-		}
-	    ]
-	},
-	{
-	    "name": "ModeFilter",
-	    "parameters":
-	    [
+			"name": "ModeFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
+		},
 		{
-		    "parameter": "size",
-		    "value": "3"
-		}
-	    ]
-	},
-	{
-	    "name": "MedianFilter",
-	    "parameters":
-	    [
+			"name": "MedianFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
+		},
 		{
-		    "parameter": "size",
-		    "value": "3"
+			"name": "Edge",
+			"parameters": null
 		}
-	    ]
-	},
-	{
-	    "name": "Edge",
-	    "parameters": null
-	}
-    ]
+	]
 }

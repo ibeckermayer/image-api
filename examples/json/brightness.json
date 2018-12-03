@@ -1,16 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "Brightness",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "factor",
-		    "value": "1.7"
+			"name": "Brightness",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "1.7"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

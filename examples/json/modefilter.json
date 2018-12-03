@@ -1,16 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "ModeFilter",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "size",
-		    "value": "3"
+			"name": "ModeFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

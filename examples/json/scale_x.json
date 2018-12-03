@@ -1,16 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "Scale",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "xsize",
-		    "value": "300"
+			"name": "Scale",
+			"parameters": [
+				{
+					"parameter": "xsize",
+					"value": "300"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

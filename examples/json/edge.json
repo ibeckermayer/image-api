@@ -1,9 +1,8 @@
 {
-    "processes":
-    [
-	{
-	    "name": "Edge",
-	    "parameters": null
-	}
-    ]
+	"processes": [
+		{
+			"name": "Edge",
+			"parameters": null
+		}
+	]
 }

@@ -1,16 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "Contrast",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "factor",
-		    "value": "1.7"
+			"name": "Contrast",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "1.7"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

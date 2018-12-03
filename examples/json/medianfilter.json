@@ -1,16 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "MedianFilter",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "size",
-		    "value": "3"
+			"name": "MedianFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

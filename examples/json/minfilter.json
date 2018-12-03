@@ -1,16 +1,13 @@
 {
-    "processes":
-    [
-	{
-	    "name": "MinFilter",
-	    "parameters":
-	    [
+	"processes": [
 		{
-		    "parameter": "size",
-		    "value": "3"
+			"name": "MinFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-
