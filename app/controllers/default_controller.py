@@ -44,12 +44,12 @@ def image_process():
     try:
         if not "array_of_Process" in processes_dict:
             return 'Invalid JSON: JSON must have property "array_of_Process"', 400
-        processes = [dict_to_process(x) for x in processes_dict["array_of_Process"]]
+        processes = [dict_to_process(x).operation() for x in processes_dict["array_of_Process"]]
     except Exception as e:
         return str(e), 400
 
     try:
-        processedImage = pipeline(image, [process.operation() for process in processes])
+        processedImage = pipeline(image, processes)
         return serve_pil_image(processedImage, image_format), 200
     except Exception as e:
         return str(e), 400
