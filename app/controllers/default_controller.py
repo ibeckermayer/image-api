@@ -59,10 +59,6 @@ def serve_pil_image(pil_img: Image, image_format: dict, uploadedFormat: str):
     if image_format != None and "type" in image_format:
         desiredQuality = (image_format.get("quality") or desiredQuality)
         desiredFormat = image_format["type"].upper()
-    
-    print(desiredQuality)
-    print(desiredFormat)
-    print(desiredMime)
 
     pil_img.save(img_io, desiredFormat, quality=desiredQuality)
     img_io.seek(0)
