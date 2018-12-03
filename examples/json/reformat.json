@@ -1,6 +1,6 @@
 {
     "format": {
-        "type": "JPEG",
+        "type": "BMP",
         "quality": 2
     },
     "processes": []
