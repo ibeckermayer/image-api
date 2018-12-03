@@ -13,11 +13,14 @@ import itertools
 from PIL import Image
 
 class Process(Model):
-    def __init__(self, requires_params: bool=None, minimum_params: int=None,
-                 maximum_params: int=None, valid_params: List[Tuple[str]]=None,
-                 param_type: type=None, operation=None):
+    def __init__(self,
+                 valid_params: List[Tuple[str]]=None,
+                 param_type: type=None,
+                 operation=None):
         self.name = self.__class__.__name__[7:]
         self._valid_params = valid_params  # list of tuples. Each process must have at least one parameter from each tuple to be considered valid
+        self._param_type = param_type  # type that string param must get converted into
+        self._operation = operation  # Operation that process preforms
         if self._valid_params is not None:
             self._requires_params = True  # boolean denoting whether this process needs params
             self._minimum_params = len(self._valid_params)
@@ -26,8 +29,6 @@ class Process(Model):
             self._requires_params = False
             self._minimum_params = 0
             self._maximum_params = 0
-        self._param_type = param_type  # type that string param must get converted into
-        self._operation = operation  # Operation that process preforms
 
         self.swagger_types = {
             'name': str,

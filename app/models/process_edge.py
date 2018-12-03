@@ -21,12 +21,9 @@ class ProcessEdge(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessEdge, self).__init__(requires_params=False,
-                                                minimum_params=None,
-                                                maximum_params=None,
-                                                valid_params=None,
-                                                param_type=None,
-                                                operation=edge)
+        super(ProcessEdge, self).__init__(valid_params=None,
+                                          param_type=None,
+                                          operation=edge)
 
 
     @classmethod

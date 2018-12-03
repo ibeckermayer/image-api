@@ -21,12 +21,9 @@ class ProcessMedianFilter(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessMedianFilter, self).__init__(requires_params=True,
-                                                minimum_params=1,
-                                                maximum_params=1,
-                                                valid_params=[["size"]],
-                                                param_type=int,
-                                                operation=medianFilter)
+        super(ProcessMedianFilter, self).__init__(valid_params=[["size"]],
+                                                  param_type=int,
+                                                  operation=medianFilter)
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessMedianFilter':

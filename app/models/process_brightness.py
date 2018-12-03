@@ -21,10 +21,7 @@ class ProcessBrightness(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessBrightness, self).__init__(requires_params=True,
-                                                minimum_params=1,
-                                                maximum_params=1,
-                                                valid_params=[["factor"]],
+        super(ProcessBrightness, self).__init__(valid_params=[["factor"]],
                                                 param_type=float,
                                                 operation=brightness)
 

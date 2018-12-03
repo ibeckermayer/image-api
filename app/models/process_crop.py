@@ -21,15 +21,12 @@ class ProcessCrop(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessCrop, self).__init__(requires_params=True,
-                                            minimum_params=4,
-                                            maximum_params=4,
-                                            valid_params=[["top_left_x"],
-                                                          ["top_left_y"],
-                                                          ["bottom_right_x"],
-                                                          ["bottom_right_y"]],
-                                            param_type=int,
-                                            operation=crop)
+        super(ProcessCrop, self).__init__(valid_params=[["top_left_x"],
+                                                        ["top_left_y"],
+                                                        ["bottom_right_x"],
+                                                        ["bottom_right_y"]],
+                                          param_type=int,
+                                          operation=crop)
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessCrop':

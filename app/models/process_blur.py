@@ -21,12 +21,9 @@ class ProcessBlur(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessBlur, self).__init__(requires_params=True,
-                                                minimum_params=1,
-                                                maximum_params=1,
-                                                valid_params=[["radius"]],
-                                                param_type=float,
-                                                operation=blur)
+        super(ProcessBlur, self).__init__(valid_params=[["radius"]],
+                                          param_type=float,
+                                          operation=blur)
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessBlur':

@@ -22,10 +22,7 @@ class ProcessMirror(Process):
         """
 
         self._array_of_parameter = array_of_parameter
-        super(ProcessMirror, self).__init__(requires_params=True,
-                                            minimum_params=1,
-                                            maximum_params=1,
-                                            valid_params=[["flip"]],
+        super(ProcessMirror, self).__init__(valid_params=[["flip"]],
                                             param_type=str,
                                             operation=mirror)
 
