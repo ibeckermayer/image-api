@@ -22,7 +22,7 @@ class Process(Model):
         self._maximum_params = maximum_params  # maximum number of parameters taken by this process
         self._valid_params = valid_params  # list of tuples. Each process must have at least one parameter from each tuple to be considered valid
         self._param_type = param_type  # type that string param must get converted into
-        self._operation = operation  # Operation (TODO: define operation class and subclasses) that process preforms
+        self._operation = operation  # Operation that process preforms
 
         self.swagger_types = {
             'name': str,
@@ -34,7 +34,6 @@ class Process(Model):
             'array_of_parameter': 'array_of_Parameter'
         }
 
-    # @property TODO: make this a property
     def operation(self):
         """verifies the process is properly formed, then fills out the operation with it's parameters"""
         self._verify_parameters()
