@@ -37,6 +37,21 @@ definitions:
     required:
     - "processes"
     properties:
+      format:
+        type: object
+        properties:
+          type: 
+            description: "The type of format to return"
+            type: string
+            enum:
+              - jpeg
+              - png
+              - gif
+              - tiff
+              - bmp
+          quality:
+            description: "The quality setting to return - only used for jpeg"
+            type: number 
       processes:
         type: "array"
         items:

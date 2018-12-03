@@ -27,13 +27,8 @@ def image_process():
         return "No Processes specified", 400
 
     # check for valid image
-    image = Image.open(request.files['Image'])
-    if type(image) == PIL.PngImagePlugin.PngImageFile:
-        image_format = "png"
-    elif type(image) == PIL.JpegImagePlugin.JpegImageFile:
-        image_format = "jpg"
-    else:
-        return "Invalid image format for Image", 400
+    uploadedImage = Image.open(request.files['Image'])
+    uploadedFormat = uploadedImage.__class__.__name__.replace("ImageFile", "").upper()
 
     # check for valid json
     try:
@@ -50,22 +45,28 @@ def image_process():
         return str(e), 400
 
     try:
-        processedImage = pipeline(image, processes)
-        return serve_pil_image(processedImage, image_format), 200
+        processedImage = pipeline(uploadedImage, processes)
+        return serve_pil_image(processedImage, processes_dict.get("format"), uploadedFormat), 200
     except Exception as e:
         return str(e), 400
 
-def serve_pil_image(pil_img: Image, image_format: str):
+def serve_pil_image(pil_img: Image, image_format: dict, uploadedFormat: str):
     """Convert PIL image into image that can be returned by flask endpoint"""
     img_io = BytesIO()
-    if image_format == "png":
-        pil_img.save(img_io, 'PNG', quality=70)
-        img_io.seek(0)
-        return send_file(img_io, mimetype='image/png')
-    elif image_format == "jpg":
-        pil_img.save(img_io, 'JPEG', quality=70)
-        img_io.seek(0)
-        return send_file(img_io, mimetype='image/jpeg')
+    desiredQuality = 100
+    desiredFormat = uploadedFormat
+    desiredMime = 'image/' + desiredFormat.lower()
+    if image_format != None and "type" in image_format:
+        desiredQuality = (image_format.get("quality") or desiredQuality)
+        desiredFormat = image_format["type"].upper()
+    
+    print(desiredQuality)
+    print(desiredFormat)
+    print(desiredMime)
+
+    pil_img.save(img_io, desiredFormat, quality=desiredQuality)
+    img_io.seek(0)
+    return send_file(img_io, mimetype=desiredMime)
 
 def load_pil_image(imageUpload: FileStorage) -> Image:
     """Load an uploaded file into a processable PIL image"""
