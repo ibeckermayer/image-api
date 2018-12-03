@@ -12,6 +12,7 @@ from app.models import ProcessModeFilter
 from app.models import ProcessRotate
 from app.models import ProcessScale
 from app.models import ProcessSharpen
+from app.models import Process
 
 typeTable = {
  "Rotate": ProcessRotate,
@@ -30,7 +31,14 @@ typeTable = {
  "Edge": ProcessEdge
 }
 
-def lookup_operation_by_name(operation_name: str):
-    if not operation_name in typeTable:
-        raise ValueError(operation_name + " is not a valid process name")
-    return typeTable[operation_name]
+def load_process_from_dict(dikt: dict) -> Process:
+    if not "name" in dikt:
+        raise ValueError("Process is missing the required field 'name'")
+
+    process_class = lookup_process_by_name(dikt["name"])
+    return process_class(dikt.get("array_of_Parameter"))
+
+def lookup_process_by_name(process_name: str):
+    if not process_name in typeTable:
+        raise ValueError(process_name + " is not a valid process name")
+    return typeTable[process_name]
