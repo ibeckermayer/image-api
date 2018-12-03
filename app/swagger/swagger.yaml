@@ -44,11 +44,14 @@ definitions:
             description: "The type of format to return"
             type: string
             enum:
-              - jpeg
-              - png
-              - gif
-              - tiff
-              - bmp
+              - JPEG
+              - PNG
+              - GIF
+              - TIFF
+              - BMP
+              - EPS
+              - ICO
+              - TGA              
           quality:
             description: "The quality setting to return - only used for jpeg"
             type: number 
