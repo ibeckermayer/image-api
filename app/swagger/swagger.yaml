@@ -43,15 +43,15 @@ definitions:
           $ref: "#/definitions/Process"
         example:
           - name: Rotate
-            array_of_Parameter:
+            parameters:
               - parameter: degrees
                 value: "30"
           - name: Scale
-            array_of_Parameter:
+            parameters:
               - parameter: xsize
                 value: "30"
           - name: Crop
-            array_of_Parameter:
+            parameters:
               - parameter: top_left_x
                 value: "30"
               - parameter: top_left_y
@@ -61,47 +61,47 @@ definitions:
               - parameter: bottom_right_y
                 value: "60"
           - name: Mirror
-            array_of_Parameter:
+            parameters:
               - parameter: flip
                 value: "horizontal"
           - name: Color
-            array_of_Parameter:
+            parameters:
               - parameter: factor
                 value: "1.7"
           - name: Brightness
-            array_of_Parameter:
+            parameters:
               - parameter: factor
                 value: "1.7"
           - name: Contrast
-            array_of_Parameter:
+            parameters:
               - parameter: factor
                 value: "1.7"
           - name: Sharpen
-            array_of_Parameter:
+            parameters:
               - parameter: factor
                 value: "1.7"
           - name: Blur
-            array_of_Parameter:
+            parameters:
               - parameter: radius
                 value: "1.7"
           - name: MaxFilter
-            array_of_Parameter:
+            parameters:
               - parameter: size
                 value: "3"
           - name: MinFilter
-            array_of_Parameter:
+            parameters:
               - parameter: size
                 value: "3"
           - name: ModeFilter
-            array_of_Parameter:
+            parameters:
               - parameter: size
                 value: "3"
           - name: MedianFilter
-            array_of_Parameter:
+            parameters:
               - parameter: size
                 value: "3"
           - name: Edge
-            array_of_Parameter:
+            parameters:
 
   Process:
     description: Specification of a single process.
@@ -126,7 +126,7 @@ definitions:
         - ModeFilter
         - MedianFilter
         - Edge
-      array_of_Parameter:
+      parameters:
         description: Parameter array to further specify the process, if necessary.
         type: array
         items:
@@ -158,12 +158,12 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - Rotate
-          array_of_Parameter:
+          parameters:
             description: Single item array containing the degrees to rotate the image.
             items:
               type: object
@@ -183,13 +183,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - Scale
             example: Scale
-          array_of_Parameter:
+          parameters:
             description: Provide xsize, ysize, or both.
             items:
               type: object
@@ -212,13 +212,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - Crop
             example: Crop
-          array_of_Parameter:
+          parameters:
             description: Must provide both (x,y) pairs.
             items:
               type: object
@@ -247,7 +247,7 @@ definitions:
             enum: 
             - Mirror
             example: Mirror
-          array_of_Parameter:
+          parameters:
             description: Specify direction.
             items:
               type: object
@@ -273,13 +273,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - Color
             example: Color
-          array_of_Parameter:
+          parameters:
             description: Specify factor.
             items:
               type: object
@@ -301,13 +301,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - Brightness
             example: Brightness
-          array_of_Parameter:
+          parameters:
             description: Specify factor.
             items:
               type: object
@@ -329,13 +329,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - Contrast
             example: Contrast
-          array_of_Parameter:
+          parameters:
             description: Specify factor.
             items:
               type: object
@@ -357,13 +357,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - Sharpen
             example: Sharpen
-          array_of_Parameter:
+          parameters:
             description: Specify factor.
             items:
               type: object
@@ -385,13 +385,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - Blur
             example: Blur
-          array_of_Parameter:
+          parameters:
             description: Specify radius.
             items:
               type: object
@@ -413,13 +413,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - MaxFilter
             example: MaxFilter
-          array_of_Parameter:
+          parameters:
             description: Specify size of filter window.
             items:
               type: object
@@ -441,13 +441,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - MinFilter
             example: MinFilter
-          array_of_Parameter:
+          parameters:
             description: Specify size of filter window.
             items:
               type: object
@@ -469,13 +469,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - ModeFilter
             example: ModeFilter
-          array_of_Parameter:
+          parameters:
             description: Specify size of filter window.
             items:
               type: object
@@ -497,13 +497,13 @@ definitions:
       - $ref: "#/definitions/Process"
       - type: object
         required:
-        - "array_of_Parameter"
+        - "parameters"
         properties:
           name:
             enum: 
             - MedianFilter
             example: MedianFilter
-          array_of_Parameter:
+          parameters:
             description: Specify size of filter window.
             items:
               type: object

@@ -36,7 +36,7 @@ def load_process_from_dict(dikt: dict) -> Process:
         raise ValueError("Process is missing the required field 'name'")
 
     process_class = lookup_process_by_name(dikt["name"])
-    return process_class(dikt.get("array_of_Parameter"))
+    return process_class(dikt.get("parameters"))
 
 def lookup_process_by_name(process_name: str):
     if not process_name in typeTable:

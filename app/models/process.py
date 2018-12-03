@@ -37,7 +37,7 @@ class Process(Model):
 
         self.attribute_map = {
             'name': 'name',
-            'parameters': 'array_of_Parameter'
+            'parameters': 'parameters'
         }
 
     def operation(self):
@@ -57,14 +57,14 @@ class Process(Model):
             self._param_val_check()
 
     def _has_array_of_param_check(self):
-        """optionally called by _verify() if Process requires array_of_Parameter"""
+        """optionally called by _verify() if Process requires parameters"""
         if self._parameters == None:
-            raise ValueError("Process [" + self.name + "] must have property array_of_Parameter")
+            raise ValueError("Process [" + self.name + "] must have property parameters")
 
     def _len_array_of_param_check(self):
         if not(len(self._parameters) >= self._minimum_params and
                len(self._parameters) <= self._maximum_params):
-            raise ValueError("Process [" + self.name + "] must have property array_of_Parameter between length {0} and {1}".format(self._minimum_params, self._maximum_params))
+            raise ValueError("Process [" + self.name + "] must have property parameters between length {0} and {1}".format(self._minimum_params, self._maximum_params))
 
     def _param_name_check(self):
         """checks that the process has a parameter that matches at least one parameter in each list in _valid_params
