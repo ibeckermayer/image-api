@@ -9,7 +9,7 @@ from PIL import Image
 from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 from os import remove
-from app.operationLookup import lookup_operation_by_name
+from app.processLoader import load_process_from_dict
 from app.operations import pipeline
 import PIL
 from app.models import Process
@@ -45,7 +45,7 @@ def image_process():
     try:
         if not "array_of_Process" in processes_dict:
             return 'Invalid JSON: JSON must have property "array_of_Process"', 400
-        processes = [dict_to_process(x).operation() for x in processes_dict["array_of_Process"]]
+        processes = [load_process_from_dict(x).operation() for x in processes_dict["array_of_Process"]]
     except Exception as e:
         return str(e), 400
 
@@ -66,13 +66,6 @@ def serve_pil_image(pil_img: Image, image_format: str):
         pil_img.save(img_io, 'JPEG', quality=70)
         img_io.seek(0)
         return send_file(img_io, mimetype='image/jpeg')
-
-def dict_to_process(dikt: dict) -> Process:
-    if not "name" in dikt:
-        raise ValueError("Process is missing the required field 'name'")
-
-    operation_class = lookup_operation_by_name(dikt["name"])
-    return operation_class(dikt.get("array_of_Parameter"))
 
 def loadImage(imageUpload: FileStorage) -> Image:
     try:
