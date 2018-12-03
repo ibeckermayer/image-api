@@ -21,9 +21,11 @@ class ProcessMinFilter(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessMinFilter, self).__init__(valid_params=[["size"]],
                                                param_type=int,
                                                operation=minFilter)
+
 
 
     @classmethod

@@ -22,6 +22,7 @@ class ProcessMirror(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessMirror, self).__init__(valid_params=[["flip"]],
                                             param_type=str,
                                             operation=mirror)

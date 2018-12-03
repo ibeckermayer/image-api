@@ -35,9 +35,9 @@ definitions:
     description: Object containing the array of processes to preform on the image. Processes will be carried out in the order listed.
     type: "object"
     required:
-    - "array_of_Process"
+    - "processes"
     properties:
-      array_of_Process:
+      processes:
         type: "array"
         items:
           $ref: "#/definitions/Process"

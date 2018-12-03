@@ -19,21 +19,21 @@ from enum import Enum
 
 
 class Processes(Model):
-    def __init__(self, array_of_process: List[Process]=None):  # noqa: E501
+    def __init__(self, processes: List[Process]=None):  # noqa: E501
         """Processes - a model defined in Swagger
 
-        :param array_of_process: The array_of_process of this Processes.  # noqa: E501
-        :type array_of_process: List[Process]
+        :param processes: The processes of this Processes.  # noqa: E501
+        :type processes: List[Process]
         """
         self.swagger_types = {
-            'array_of_process': List[Process]
+            'processes': List[Process]
         }
 
         self.attribute_map = {
-            'array_of_process': 'array_of_Process'
+            'processes': 'processes'
         }
 
-        self._array_of_process = array_of_process
+        self._processes = processes
 
     @classmethod
     def from_dict(cls, dikt) -> 'Processes':
@@ -47,27 +47,27 @@ class Processes(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def array_of_process(self) -> List[Process]:
-        """Gets the array_of_process of this Processes.
+    def processes(self) -> List[Process]:
+        """Gets the processes of this Processes.
 
 
-        :return: The array_of_process of this Processes.
+        :return: The processes of this Processes.
         :rtype: List[Process]
         """
-        return self._array_of_process
+        return self._processes
 
-    @array_of_process.setter
-    def array_of_process(self, array_of_process: List[Process]):
-        """Sets the array_of_process of this Processes.
+    @processes.setter
+    def processes(self, processes: List[Process]):
+        """Sets the processes of this Processes.
 
 
-        :param array_of_process: The array_of_process of this Processes.
-        :type array_of_process: List[Process]
+        :param processes: The processes of this Processes.
+        :type processes: List[Process]
         """
-        if array_of_process is None:
-            raise ValueError("Invalid value for `array_of_process`, must not be `None`")  # noqa: E501
+        if processes is None:
+            raise ValueError("Invalid value for `processes`, must not be `None`")  # noqa: E501
 
-        self._array_of_process = array_of_process
+        self._processes = processes
 
     def run(self, image: Image):
         """verifies the Processes and then runs each of them on the image.
@@ -78,10 +78,10 @@ class Processes(Model):
         return reduce(lambda last, operation: operation(last), operations, image)
 
     def _verify_processes_get_operations(self):
-        """Verifies the validity of each Process in self._array_of_process
+        """Verifies the validity of each Process in self._processes
 
         :return: a list of operations to preform
         """
         operations = []
-        for process in self._array_of_process:
+        for process in self._processes:
             operations.append(process.verify_process_get_operation())

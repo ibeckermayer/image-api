@@ -21,10 +21,10 @@ class ProcessMaxFilter(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessMaxFilter, self).__init__(valid_params=[["size"]],
                                                param_type=int,
                                                operation=maxFilter)
-
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessMaxFilter':

@@ -1,16 +1,13 @@
 {
-    "array_of_Process":
-    [
-	{
-	    "name": "Blur",
-	    "array_of_Parameter":
-	    [
+	"processes": [
 		{
-		    "parameter": "radius",
-		    "value": "1.7"
+			"name": "Blur",
+			"parameters": [
+				{
+					"parameter": "radius",
+					"value": "1.7"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

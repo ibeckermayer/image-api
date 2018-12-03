@@ -43,9 +43,9 @@ def image_process():
 
     # convert to Processes object
     try:
-        if not "array_of_Process" in processes_dict:
-            return 'Invalid JSON: JSON must have property "array_of_Process"', 400
-        processes = [load_process_from_dict(x).operation() for x in processes_dict["array_of_Process"]]
+        if not "processes" in processes_dict:
+            return 'Invalid JSON: JSON must have property "processes"', 400
+        processes = [load_process_from_dict(x).operation() for x in processes_dict["processes"]]
     except Exception as e:
         return str(e), 400
 
@@ -68,10 +68,10 @@ def serve_pil_image(pil_img: Image, image_format: str):
         return send_file(img_io, mimetype='image/jpeg')
 
 def load_pil_image(imageUpload: FileStorage) -> Image:
+    """Load an uploaded file into a processable PIL image"""
     try:
         in_memory_file = io.BytesIO()
         imageUpload.save(in_memory_file)
-        image = Image.open(in_memory_file)
+        return Image.open(in_memory_file)
     except:
-        image = None
-    return image
+        return None

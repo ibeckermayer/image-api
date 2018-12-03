@@ -21,10 +21,10 @@ class ProcessColor(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessColor, self).__init__(valid_params=[["factor"]],
                                            param_type=float,
                                            operation=color)
-
 
     @classmethod
     def from_dict(cls, dikt) -> 'ProcessColor':

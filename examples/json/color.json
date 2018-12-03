@@ -1,16 +1,13 @@
 {
-    "array_of_Process":
-    [
-	{
-	    "name": "Color",
-	    "array_of_Parameter":
-	    [
+	"processes": [
 		{
-		    "parameter": "factor",
-		    "value": "3.7"
+			"name": "Color",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "3.7"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

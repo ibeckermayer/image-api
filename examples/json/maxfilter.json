@@ -1,16 +1,13 @@
 {
-    "array_of_Process":
-    [
-	{
-	    "name": "MaxFilter",
-	    "array_of_Parameter":
-	    [
+	"processes": [
 		{
-		    "parameter": "size",
-		    "value": "3"
+			"name": "MaxFilter",
+			"parameters": [
+				{
+					"parameter": "size",
+					"value": "3"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

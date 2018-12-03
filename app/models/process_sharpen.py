@@ -21,6 +21,7 @@ class ProcessSharpen(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessSharpen, self).__init__(valid_params=[["factor"]],
                                              param_type=float,
                                              operation=sharpen)

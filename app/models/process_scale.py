@@ -21,6 +21,7 @@ class ProcessScale(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessScale, self).__init__(valid_params=[["xsize", "ysize"]],
                                            param_type=int,
                                            operation=scale)

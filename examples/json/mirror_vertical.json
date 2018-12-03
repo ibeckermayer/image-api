@@ -1,15 +1,13 @@
 {
-    "array_of_Process":
-    [
-	{
-	    "name": "Mirror",
-	    "array_of_Parameter":
-	    [
+	"processes": [
 		{
-		    "parameter": "flip",
-		    "value": "vertical"
+			"name": "Mirror",
+			"parameters": [
+				{
+					"parameter": "flip",
+					"value": "vertical"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }

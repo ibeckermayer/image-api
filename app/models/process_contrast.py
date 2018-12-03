@@ -21,6 +21,7 @@ class ProcessContrast(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessContrast, self).__init__(valid_params=[["factor"]],
                                               param_type=float,
                                               operation=contrast)

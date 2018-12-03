@@ -1,8 +1,8 @@
 {
-	"array_of_Process": [
+	"processes": [
 		{
 			"name": "Scale",
-			"array_of_Parameter": [
+			"parameters": [
 				{
 					"parameter": "xsize",
 					"value": "300"

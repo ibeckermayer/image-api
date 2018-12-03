@@ -1,9 +1,8 @@
 {
-    "array_of_Process":
-    [
-	{
-	    "name": "Edge",
-	    "array_of_Parameter": null
-	}
-    ]
+	"processes": [
+		{
+			"name": "Edge",
+			"parameters": null
+		}
+	]
 }

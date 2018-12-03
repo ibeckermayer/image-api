@@ -1,16 +1,13 @@
 {
-    "array_of_Process":
-    [
-	{
-	    "name": "Scale",
-	    "array_of_Parameter":
-	    [
+	"processes": [
 		{
-		    "parameter": "xsize",
-		    "value": "300"
+			"name": "Scale",
+			"parameters": [
+				{
+					"parameter": "xsize",
+					"value": "300"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

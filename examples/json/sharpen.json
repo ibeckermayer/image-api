@@ -1,16 +1,13 @@
 {
-    "array_of_Process":
-    [
-	{
-	    "name": "Sharpen",
-	    "array_of_Parameter":
-	    [
+	"processes": [
 		{
-		    "parameter": "factor",
-		    "value": "1.7"
+			"name": "Sharpen",
+			"parameters": [
+				{
+					"parameter": "factor",
+					"value": "1.7"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }
-

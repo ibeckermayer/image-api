@@ -21,9 +21,11 @@ class ProcessEdge(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessEdge, self).__init__(valid_params=None,
                                           param_type=None,
                                           operation=edge)
+
 
 
     @classmethod

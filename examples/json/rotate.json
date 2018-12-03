@@ -1,15 +1,13 @@
 {
-    "array_of_Process":
-    [
-	{
-	    "name": "Rotate",
-	    "array_of_Parameter":
-	    [
+	"processes": [
 		{
-		    "parameter": "degrees",
-		    "value": "30"
+			"name": "Rotate",
+			"parameters": [
+				{
+					"parameter": "degrees",
+					"value": "30"
+				}
+			]
 		}
-	    ]
-	}
-    ]
+	]
 }

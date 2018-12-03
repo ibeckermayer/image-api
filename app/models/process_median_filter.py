@@ -21,6 +21,7 @@ class ProcessMedianFilter(Process):
         """
 
         self._parameters = parameters
+
         super(ProcessMedianFilter, self).__init__(valid_params=[["size"]],
                                                   param_type=int,
                                                   operation=medianFilter)
