@@ -17,12 +17,17 @@ class Process(Model):
                  maximum_params: int=None, valid_params: List[Tuple[str]]=None,
                  param_type: type=None, operation=None):
         self.name = self.__class__.__name__[7:]
-        self._requires_params = requires_params  # boolean denoting whether this process needs params
-        self._minimum_params = minimum_params  # minimum number of parameters taken by this process
-        self._maximum_params = maximum_params  # maximum number of parameters taken by this process
         self._valid_params = valid_params  # list of tuples. Each process must have at least one parameter from each tuple to be considered valid
+        if self._valid_params is not None:
+            self._requires_params = True  # boolean denoting whether this process needs params
+            self._minimum_params = len(self._valid_params)
+            self._maximum_params = len([item for sublist in self._valid_params for item in sublist])
+        else:
+            self._requires_params = False
+            self._minimum_params = 0
+            self._maximum_params = 0
         self._param_type = param_type  # type that string param must get converted into
-        self._operation = operation  # Operation (TODO: define operation class and subclasses) that process preforms
+        self._operation = operation  # Operation that process preforms
 
         self.swagger_types = {
             'name': str,
@@ -34,7 +39,6 @@ class Process(Model):
             'parameters': 'parameters'
         }
 
-    # @property TODO: make this a property
     def operation(self):
         """verifies the process is properly formed, then fills out the operation with it's parameters"""
         self._verify_parameters()
