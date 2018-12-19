@@ -1,7 +1,9 @@
 FROM python:3.6.4
 
 ARG IMAGE_PORT
+ARG IMAGE_HOST
 ENV IMAGE_PORT=${IMAGE_PORT}
+ENV IMAGE_HOST=${IMAGE_HOST}
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
