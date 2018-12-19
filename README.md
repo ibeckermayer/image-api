@@ -21,10 +21,10 @@ To run the server on a Docker container, please execute the following from the r
 
 ```bash
 # building the image
-docker build -t swagger_server .
+docker build --build-arg IMAGE_PORT=$IMAGE_PORT -t image_server ./
 
 # starting up a container
-docker run -p 5000:50000 swagger_server
+docker run -p $IMAGE_PORT:$IMAGE_PORT image_server
 ```
 
 ## Examples

@@ -13,7 +13,7 @@ def main():
     swaggerui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, SWAGGER_PATH, config={'spec': swagger_yml})
     default_controller.app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
     # app.run(ssl_context='adhoc', port=8080)
-    default_controller.app.run(port=5000)
+    default_controller.app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
     main()
