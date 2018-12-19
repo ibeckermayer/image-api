@@ -5,9 +5,9 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from app.models.base_model_ import Model
-from app.models.process import Process  # noqa: F401,E501
-from app import util
+from server.models.base_model_ import Model
+from server.models.process import Process  # noqa: F401,E501
+from server import util
 
 from PIL.Image import Image, BICUBIC, FLIP_LEFT_RIGHT, FLIP_TOP_BOTTOM
 from PIL import ImageEnhance
@@ -84,4 +84,4 @@ class Processes(Model):
         """
         operations = []
         for process in self._processes:
-            operations.append(process.verify_process_get_operation())
+            operations.server.nd(process.verify_process_get_operation())

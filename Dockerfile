@@ -16,4 +16,4 @@ EXPOSE ${IMAGE_PORT}
 
 ENTRYPOINT ["python3"]
 
-CMD ["-m", "app"]
+CMD ["-m", "server"]

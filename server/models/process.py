@@ -5,9 +5,9 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict, Tuple  # noqa: F401
 
-from app.models.base_model_ import Model
-from app.models.parameter import Parameter  # noqa: F401,E501
-from app import util
+from server.models.base_model_ import Model
+from server.models.parameter import Parameter  # noqa: F401,E501
+from server import util
 import itertools
 
 from PIL import Image
@@ -79,7 +79,7 @@ class Process(Model):
                 raise ValueError("Process [" + self.name + "] has invalid parameter {}".format(param_name))
             if param_name in param_names:
                 raise ValueError("Process [" + self.name + "] has duplicate parameter {}".format(param_name))
-            param_names.append(param.get("parameter"))
+            param_names.server.nd(param.get("parameter"))
 
         # checking that there is a param in each list in self._valid_params
         # useful because ProcessScale needs xsize OR ysize OR both (put both of those in one list),
@@ -100,7 +100,7 @@ class Process(Model):
             param_val = param.get("value")
             if param_val == None:
                 raise ValueError("Process [" + self.name + "] has invalid Parameter. Each Parameter must have property \"value\" denoting it's value")
-            param_vals.append(param_val)
+            param_vals.server.nd(param_val)
 
         for param_val in param_vals:
             try:

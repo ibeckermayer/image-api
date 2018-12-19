@@ -3,16 +3,16 @@
 from flask import Flask, jsonify
 from flask_swagger_ui import get_swaggerui_blueprint
 from yaml import Loader, load
-from app.controllers import default_controller
+from server.controllers import default_controller
 
 SWAGGER_URL = '/image/ui'
-SWAGGER_PATH = 'app/swagger/swagger.yaml'
+SWAGGER_PATH = 'server/swagger/swagger.yaml'
 
 def main():
     swagger_yml = load(open(SWAGGER_PATH, 'r'), Loader=Loader)
     swaggerui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, SWAGGER_PATH, config={'spec': swagger_yml})
     default_controller.app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
-    # app.run(ssl_context='adhoc', port=8080)
+    # server.run(ssl_context='adhoc', port=8080)
     default_controller.app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':

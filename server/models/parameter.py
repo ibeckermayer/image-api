@@ -5,8 +5,8 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from app.models.base_model_ import Model
-from app import util
+from server.models.base_model_ import Model
+from server import util
 
 class Parameter(Model):
     def __init__(self, parameter: str=None, value: str=None):  # noqa: E501

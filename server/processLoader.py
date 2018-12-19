@@ -1,18 +1,18 @@
-from app.models import ProcessBlur
-from app.models import ProcessBrightness
-from app.models import ProcessColor
-from app.models import ProcessContrast
-from app.models import ProcessCrop
-from app.models import ProcessEdge
-from app.models import ProcessMaxFilter
-from app.models import ProcessMedianFilter
-from app.models import ProcessMinFilter
-from app.models import ProcessMirror
-from app.models import ProcessModeFilter
-from app.models import ProcessRotate
-from app.models import ProcessScale
-from app.models import ProcessSharpen
-from app.models import Process
+from server.models import ProcessBlur
+from server.models import ProcessBrightness
+from server.models import ProcessColor
+from server.models import ProcessContrast
+from server.models import ProcessCrop
+from server.models import ProcessEdge
+from server.models import ProcessMaxFilter
+from server.models import ProcessMedianFilter
+from server.models import ProcessMinFilter
+from server.models import ProcessMirror
+from server.models import ProcessModeFilter
+from server.models import ProcessRotate
+from server.models import ProcessScale
+from server.models import ProcessSharpen
+from server.models import Process
 
 typeTable = {
  "Rotate": ProcessRotate,

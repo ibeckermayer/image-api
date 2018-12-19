@@ -1,20 +1,20 @@
 from io import BytesIO
 import json
 from functools import reduce
-from app import util
+from server import util
 from flask import Flask, request, send_file
 from werkzeug.datastructures import FileStorage
 from PIL import Image
 from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 from os import remove
-from app.processLoader import load_process_from_dict
-from app.modeConverter import switch_modes_if_needed
-from app.operations import pipeline
+from server.processLoader import load_process_from_dict
+from server.modeConverter import switch_modes_if_needed
+from server.operations import pipeline
 import PIL
-from app.models import Process
+from server.models import Process
 
-#from app.models.process import Process
+#from server.models.process import Process
 
 app = Flask(__name__)
 
