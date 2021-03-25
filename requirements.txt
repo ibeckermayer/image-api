@@ -35,7 +35,7 @@ pycparser==2.19
 Pygments==2.2.0
 pyOpenSSL==18.0.0
 python-dateutil==2.6.0
-PyYAML==3.13
+PyYAML==5.4
 randomize==0.14
 requests==2.20.1
 six==1.11.0
